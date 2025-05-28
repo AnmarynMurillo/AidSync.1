@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | AidSync</title>
+  <link rel="stylesheet" href="../../public/assets/css/global.css">
+  <link rel="stylesheet" href="../../public/assets/css/contact.css">
+</head>
+<body>
+  <div id="header-include"></div>
+  <main class="contact-main contact-flex-row">
+    <section class="contact-section">
+      <h1>Contact Us</h1>
+      <p class="contact-welcome">Do you have questions, suggestions, or want to contact us directly? Fill out this form and we will reply soon.</p>
+      <form id="contact-form" class="contact-form" autocomplete="off">
+        <div class="input-group">
+          <span class="input-icon"></span>
+          <input type="text" id="contact-name" name="name" placeholder="Full name" required maxlength="60">
+        </div>
+        <div class="input-group">
+          <span class="input-icon"></span>
+          <input type="email" id="contact-email" name="email" placeholder="Email" required maxlength="60">
+        </div>
+        <div class="input-group">
+          <span class="input-icon"></span>
+          <input type="text" id="contact-subject" name="subject" placeholder="Subject (optional)" maxlength="80">
+        </div>
+        <div class="input-group">
+          <span class="input-icon"></span>
+          <textarea id="contact-message" name="message" placeholder="Message" required maxlength="600"></textarea>
+        </div>
+        <button type="submit" class="contact-send-btn">Send</button>
+        <div id="contact-status" class="contact-status"></div>
+      </form>
+    </section>
+    <aside class="contact-side">
+      <div class="contact-logo-block">
+        <img src="../../public/assets/images/logos/Black_name.png" alt="AidSync logo" class="contact-logo" style="max-width:220px;width:100%;display:block;margin:0 auto 0.7rem auto;">
+        <div class="contact-slogan" style="text-align:center;color:var(--color-accent,#16a085);font-size:1.08rem;margin-bottom:1.2rem;">We can't help everyone, but everyone can help someone.</div>
+      </div>
+      <div class="contact-map">
+        <iframe src="https://www.google.com/maps?q=Panama&output=embed" width="100%" height="220" style="border:0;border-radius:1rem;box-shadow:0 2px 8px #003d6610;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </aside>
+  </main>
+  <div id="footer-include"></div>
+  <script src="../../public/assets/js/contact.js"></script>
+  <script>
+    fetch('../../src/components/header.html').then(r=>r.text()).then(t=>document.getElementById('header-include').innerHTML=t);
+    fetch('../../src/components/footer.html').then(r=>r.text()).then(t=>document.getElementById('footer-include').innerHTML=t);
+  </script>
+</body>
+</html>
