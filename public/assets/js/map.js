@@ -105,7 +105,7 @@ function isLoggedIn() {
 }
 
 function redirectToLogin() {
-  window.location.href = '/src/pages/login.html';
+  window.location.href = '/public/assets/pages/login.html';
 }
 
 // --- Inicialización de la página ---
