@@ -126,7 +126,7 @@ body {
   transition: background 0.2s;
 }
 [data-theme="dark"] .hamburger-line {
-  background: #fff;
+  background: #000;
 }
 .btn.login, .btn.register {
   border-radius: 7px;

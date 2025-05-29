@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog | AidSync</title>
-  <link rel="stylesheet" href="../../public/assets/css/global.css">
-  <link rel="stylesheet" href="../../public/assets/css/blog.css">
+  <link rel="stylesheet" href="/public/assets/css/global.css">
+  <link rel="stylesheet" href="/public/assets/css/blog.css">
 </head>
 <body>
   <!-- Header global -->
@@ -33,11 +33,11 @@
   </div>
   <!-- Footer global -->
   <div id="footer-include"></div>
-  <script src="../../public/assets/js/blog.js"></script>
+  <script src="/public/assets/js/blog.js"></script>
   <script>
     // Cargar header y footer globales
-    fetch('../../src/components/header.html').then(r=>r.text()).then(t=>document.getElementById('header-include').innerHTML=t);
-    fetch('../../src/components/footer.html').then(r=>r.text()).then(t=>document.getElementById('footer-include').innerHTML=t);
+    fetch('/public/assets/components/header.html').then(r=>r.text()).then(t=>document.getElementById('header-include').innerHTML=t);
+    fetch('/public/assets/components/footer.html').then(r=>r.text()).then(t=>document.getElementById('footer-include').innerHTML=t);
   </script>
 </body>
 </html>
