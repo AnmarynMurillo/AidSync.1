@@ -3,67 +3,67 @@
 // Datos de ejemplo para el equipo (11 miembros)
 const TEAM = [
   {
-    nombre: 'Juan Pérez',
+    nombre: 'Juan Morales',
     foto: '../../public/assets/images/team/juan.jpg',
     rol: 'Desarrollo',
     desc: 'Apasionado por la tecnología y el impacto social. Encargado del backend y la integración con Firebase.'
   },
   {
-    nombre: 'María Gómez',
+    nombre: 'Isaura Ríos',
     foto: '../../public/assets/images/team/maria.jpg',
     rol: 'Diseño UX/UI',
     desc: 'Diseñadora creativa, responsable de la experiencia visual y la identidad de AidSync.'
   },
   {
-    nombre: 'Carlos Ruiz',
+    nombre: 'Luis Camargo',
     foto: '../../public/assets/images/team/carlos.jpg',
     rol: 'Contenido',
     desc: 'Redactor y comunicador. Se encarga de los textos y la estrategia de comunicación.'
   },
   {
-    nombre: 'Ana Torres',
+    nombre: 'Gilberto Rodriguez',
     foto: '../../public/assets/images/team/ana.jpg',
     rol: 'Gestión de Proyectos',
     desc: 'Organiza y coordina al equipo para que todo funcione en tiempo y forma.'
   },
   {
-    nombre: 'Luis Fernández',
+    nombre: 'Patricia Fernández',
     foto: '../../public/assets/images/team/luis.jpg',
     rol: 'Frontend',
     desc: 'Desarrollador frontend, enfocado en la experiencia de usuario y accesibilidad.'
   },
   {
-    nombre: 'Sofía Martínez',
+    nombre: 'Emily Bulgin',
     foto: '../../public/assets/images/team/sofia.jpg',
     rol: 'Marketing',
     desc: 'Estratega digital, encargada de la difusión y redes sociales de AidSync.'
   },
   {
-    nombre: 'Pedro Castillo',
+    nombre: 'Duska Jimenez',
     foto: '../../public/assets/images/team/pedro.jpg',
     rol: 'QA & Testing',
     desc: 'Responsable de la calidad y pruebas de la plataforma.'
   },
   {
-    nombre: 'Lucía Herrera',
+    nombre: 'Anmaryn Murillo',
     foto: '../../public/assets/images/team/lucia.jpg',
     rol: 'Soporte Técnico',
     desc: 'Brinda soporte y ayuda a los usuarios y fundaciones.'
   },
   {
-    nombre: 'Miguel Ríos',
+    nombre: 'Stephanie Dominguez',
     foto: '../../public/assets/images/team/miguel.jpg',
     rol: 'DevOps',
     desc: 'Gestiona la infraestructura y el despliegue seguro de la plataforma.'
   },
   {
-    nombre: 'Valentina Díaz',
+    nombre: 'Elina Pérez',
     foto: '../../public/assets/images/team/valentina.jpg',
     rol: 'Legal',
     desc: 'Asegura el cumplimiento legal y la protección de datos en AidSync.'
   },
   {
-    nombre: 'Andrés López',
+    nombre: 'Jhostan Jimenez',
     foto: '../../public/assets/images/team/andres.jpg',
     rol: 'Voluntariado',
     desc: 'Enlace directo con fundaciones y voluntarios, promueve la participación activa.'
