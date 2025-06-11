@@ -35,11 +35,14 @@
       </div>
     </section>
   </main>
+
   <div id="footer-include"></div>
+
   <script src="/public/assets/js/login.js"></script>
   <script>
     fetch('/public/assets/components/header.html').then(r=>r.text()).then(t=>document.getElementById('header-include')?.innerHTML=t);
     fetch('/public/assets/components/footer.html').then(r=>r.text()).then(t=>document.getElementById('footer-include').innerHTML=t);
   </script>
+
 </body>
 </html>
