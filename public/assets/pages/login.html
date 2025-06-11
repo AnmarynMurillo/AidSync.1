@@ -24,6 +24,9 @@
         <div class="login-row login-remember-row">
           <label><input type="checkbox" id="login-remember"> Remember me</label>
         </div>
+        <div class="login-row no-account-row">
+          <span>Don't have an account? <a href="/public/assets/pages/register.html" class="login-register-link">Register</a></span>
+        </div>
         <div class="login-row login-location-msg">
           <span class="login-location-info">🔒 We use your location only to show you nearby opportunities on the map. We never share your data.</span>
         </div>
@@ -39,10 +42,10 @@
   <div id="footer-include"></div>
 
   <script src="/public/assets/js/login.js"></script>
-  <script>
-    fetch('/public/assets/components/header.html').then(r=>r.text()).then(t=>document.getElementById('header-include')?.innerHTML=t);
-    fetch('/public/assets/components/footer.html').then(r=>r.text()).then(t=>document.getElementById('footer-include').innerHTML=t);
-  </script>
-
+<script>
+// Carga header y footer externos
+fetch('public/assets/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('public/assets/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+</script>
 </body>
 </html>
