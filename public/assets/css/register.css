@@ -1,0 +1,175 @@
+/* Registro AidSync - Estilo moderno, claro/oscuro, responsivo */
+:root {
+  --register-primary: var(--color-primary, #003d66);
+  --register-accent: var(--color-accent, #16a085);
+  --register-bg: var(--color-bg, #fff);
+  --register-card: var(--color-card, #f9f9f9);
+  --register-text: var(--color-text, #003d66);
+  --register-shadow: 0 2px 12px #003d6610;
+  --voluntario: #16a085;
+  --empresa: #003d66;
+}
+[data-theme="dark"] {
+  --register-bg: #003d66;
+  --register-card: #082940;
+  --register-text: #eaf4f5;
+}
+body {
+  background: var(--register-bg);
+}
+.register-main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem 3rem 1rem;
+  font-family: 'Poppins', 'Nunito', Arial, sans-serif;
+}
+.register-main h1, .register-main h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  display: block;
+  letter-spacing: 0.5px;
+}
+.register-section {
+  background: var(--color-card);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px #0002;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  animation: modalIn 0.4s cubic-bezier(.4,2,.6,1) both;
+}
+.register-section h1 {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+}
+.register-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.register-form input,
+.register-form select,
+.register-form button.geo-btn,
+.register-form textarea {
+  border: 1.5px solid #eaf4f5;
+  background: #eaf4f5;
+  font-size: 1rem;
+  color: var(--color-text);
+  border-radius: 0.7rem;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: border 0.2s, background 0.2s;
+}
+.register-form input:focus,
+.register-form select:focus,
+.register-form textarea:focus {
+  border: 2px solid var(--color-primary);
+  background: #d6f5f0;
+}
+.register-form select {
+  cursor: pointer;
+}
+.user-type-options {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.3rem;
+}
+.user-type-voluntario {
+  color: #16a085;
+  font-weight: 600;
+}
+.user-type-empresa {
+  color: #003d66;
+  font-weight: 600;
+}
+.user-type-options input[type="radio"] {
+  accent-color: var(--color-accent);
+  margin-right: 0.3rem;
+}
+.empresa-info-msg {
+  background: #eaf4f5;
+  color: #003d66;
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.98rem;
+  margin-top: 0.5rem;
+}
+.geo-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #003d6610;
+}
+.geo-btn:hover {
+  background: var(--color-accent);
+}
+.geo-status {
+  color: var(--color-accent);
+  font-size: 0.98rem;
+  margin-top: 0.5rem;
+}
+.geo-msg {
+  color: var(--color-primary);
+  font-size: 0.98rem;
+  margin-top: 0.2rem;
+  background: #eaf4f5;
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+}
+.register-btn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.7rem 1.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  align-self: flex-end;
+  box-shadow: 0 2px 8px #003d6610;
+  transition: background 0.2s, transform 0.2s;
+}
+.register-btn:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px) scale(1.04);
+}
+.register-status {
+  margin-top: 0.7rem;
+  font-size: 1rem;
+  min-height: 1.2em;
+  color: var(--color-accent);
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .register-section { padding: 1.2rem 0.7rem; }
+  .register-main h1, .register-main h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+}
+@keyframes modalIn {
+  from { transform: translateY(60px) scale(0.97); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
