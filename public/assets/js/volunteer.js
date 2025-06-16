@@ -8,7 +8,7 @@ const VOLUNTEERS = [
     categoria: 'educacion',
     color: '#2563eb',
     colorHover: '#1d4ed8',
-    img: '../../public/assets/images/hero/educacion.jpg',
+    img: '../../public/assets/images/photos/.jpg',
     desc: 'Ayuda a niños y jóvenes a mejorar su rendimiento escolar.',
     descLarga: 'Como voluntario en Tutorías Escolares, apoyarás a estudiantes de primaria y secundaria en materias clave, motivando su aprendizaje y desarrollo personal.',
     ubicacion: 'Ciudad de México',
