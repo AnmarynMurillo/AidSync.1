@@ -18,6 +18,31 @@ firebase_admin.initialize_app(cred)
 # Inicializar servicios
 db = firestore.client()
 
+from werkzeug.security import check_password_hash
+
+@app.route('/api/auth/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    # Buscar usuario por email en la colección 'users'
+    user_ref = db.collection('users').where('email', '==', email).get()
+    if not user_ref:
+        return jsonify({'message': 'User not found'}), 401
+
+    user_doc = user_ref[0]
+    user_data = user_doc.to_dict()
+
+    # Verificar contraseña (debe estar hasheada en la base de datos)
+    if not check_password_hash(user_data['password'], password):
+        return jsonify({'message': 'Incorrect password'}), 401
+
+    # Para demo: usar el id del documento como token (en producción usa JWT)
+    token = user_doc.id
+
+    return jsonify({'token': token, 'user': {'email': user_data['email']}})
+
 @app.route('/api/auth/register', methods=['POST'])
 def register_user():
     try:
@@ -53,6 +78,7 @@ def create_pet():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+
 @app.route('/api/pets', methods=['GET'])
 def get_pets():
     try:
@@ -69,5 +95,9 @@ def get_pets():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+@app.route('/')
+def home():
+    return 'Flask is working!'
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host='0.0.0.0')
