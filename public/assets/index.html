@@ -2,30 +2,30 @@
 <div id="header-container"></div>
 
 <!-- Scripts -->
-<link rel="stylesheet" href="public/assets/css/global.css">
-<script src="public/assets/js/home.js"></script>
-<script src="/public/assets/js/header.js"></script>
+<link rel="stylesheet" href="css/global.css">
+<script src="js/home.js"></script>
+<script src="js/header.js"></script>
 <!-- Hero Sections 1 -->
 <section class="hero">
   <div class="hero-carousel">
     <div class="carousel-slide" data-area="education">
-      <img src="public/assets/images/hero/education.jpg" alt="Education">
+      <img src="images/logos/Logo_logo.png" alt="Education">
       <div class="carousel-caption">
         <h1>Welcome</h1>
         <p>AidSync connects volunteers with those who need it most.</p>
-        <span class="mantra">“Your time, their hope, one sync away”.</span>
+        <span class="mantra">"Your time, their hope, one sync away".</span>
       </div>
     </div>
     <div class="carousel-slide" data-area="health">
-      <img src="public/assets/images/hero/health.jpg" alt="Health">
+      <img src="images/logos/White_name.png" alt="Health">
       <div class="carousel-caption"></div>
     </div>
     <div class="carousel-slide" data-area="environment">
-      <img src="public/assets/images/hero/environment.jpg" alt="Environment">
+      <img src="images/logos/Black_name.png" alt="Environment">
       <div class="carousel-caption"></div>
     </div>
     <div class="carousel-slide" data-area="social">
-      <img src="public/assets/images/hero/social.jpg" alt="Social Wellbeing">
+      <img src="images/logos/Logo_logo.png" alt="Social Wellbeing">
       <div class="carousel-caption"></div>
     </div>
     <button class="carousel-btn prev">&#10094;</button>
@@ -55,22 +55,22 @@
   <h2>Supported Organizations</h2>
   <div class="org-list-grid">
     <div class="org-card environment">
-      <img src="public/assets/images/logos/org-ambiente1.png" alt="EcoVida Organization">
+      <img src="images/logos/Logo_logo.png" alt="EcoVida Organization">
       <span class="org-name">EcoVida</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card education">
-      <img src="public/assets/images/logos/org-educacion1.png" alt="EducaFuturo Organization">
+      <img src="images/logos/White_name.png" alt="EducaFuturo Organization">
       <span class="org-name">EducaFuturo</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card health">
-      <img src="public/assets/images/logos/org-salud1.png" alt="SaludParaTodos Organization">
+      <img src="images/logos/Black_name.png" alt="SaludParaTodos Organization">
       <span class="org-name">SaludParaTodos</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card social">
-      <img src="public/assets/images/logos/org-social1.png" alt="RedSolidaria Organization">
+      <img src="images/logos/Logo_logo.png" alt="RedSolidaria Organization">
       <span class="org-name">RedSolidaria</span>
       <button class="org-info-btn">More information</button>
     </div>
@@ -96,6 +96,6 @@
 
 <script>
 // Carga header y footer externos
-fetch('public/assets/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
-fetch('public/assets/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+fetch('components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
 </script>
