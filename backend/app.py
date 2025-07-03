@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
-import os
 from dotenv import load_dotenv
+from werkzeug.security import check_password_hash
 
 # Cargar variables de entorno
 load_dotenv()
@@ -18,7 +18,7 @@ firebase_admin.initialize_app(cred)
 # Inicializar servicios
 db = firestore.client()
 
-from werkzeug.security import check_password_hash
+# aqui se comienza a usar wekzeug noseque security
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
