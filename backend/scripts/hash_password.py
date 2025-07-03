@@ -1,3 +1,5 @@
+#este archivo es hash_password.py y es el archivo que se encarga de hashear la contraseña de los usuarios
+
 from werkzeug.security import generate_password_hash
 import firebase_admin
 from firebase_admin import credentials, firestore
