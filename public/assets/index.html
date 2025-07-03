@@ -1,5 +1,7 @@
+
 <!-- Incluye el header externo -->
 <div id="header-container"></div>
+<<<<<<< HEAD:public/assets/index.html
 
 <!-- Scripts -->
 <link rel="stylesheet" href="css/global.css">
@@ -10,6 +12,14 @@
   <div class="hero-carousel">
     <div class="carousel-slide" data-area="education">
       <img src="images/logos/Logo_logo.png" alt="Education">
+=======
+<!--HELLOSS-->
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-carousel">
+    <div class="carousel-slide" data-area="education">
+      <img src="public/assets/images/photos/education.webp" alt="Education">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <div class="carousel-caption">
         <h1>Welcome</h1>
         <p>AidSync connects volunteers with those who need it most.</p>
@@ -17,6 +27,7 @@
       </div>
     </div>
     <div class="carousel-slide" data-area="health">
+<<<<<<< HEAD:public/assets/index.html
       <img src="images/logos/White_name.png" alt="Health">
       <div class="carousel-caption"></div>
     </div>
@@ -26,6 +37,17 @@
     </div>
     <div class="carousel-slide" data-area="social">
       <img src="images/logos/Logo_logo.png" alt="Social Wellbeing">
+=======
+      <img src="public/assets/images/photos/pexels-photo-339620.webp" alt="Health">
+      <div class="carousel-caption"></div>
+    </div>
+    <div class="carousel-slide" data-area="environment">
+      <img src="public/assets/images/photos/environment.png" alt="Environment">
+      <div class="carousel-caption"></div>
+    </div>
+    <div class="carousel-slide" data-area="social">
+      <img src="public/assets/images/photos/socialwelfare.avif" alt="Social Wellbeing">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <div class="carousel-caption"></div>
     </div>
     <button class="carousel-btn prev">&#10094;</button>
@@ -55,22 +77,38 @@
   <h2>Supported Organizations</h2>
   <div class="org-list-grid">
     <div class="org-card environment">
+<<<<<<< HEAD:public/assets/index.html
       <img src="images/logos/Logo_logo.png" alt="EcoVida Organization">
+=======
+      <img src="public/assets/images/photos/ecovida.png" alt="EcoVida Organization">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <span class="org-name">EcoVida</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card education">
+<<<<<<< HEAD:public/assets/index.html
       <img src="images/logos/White_name.png" alt="EducaFuturo Organization">
+=======
+      <img src="public/assets/images/photos/ecofuturo.jfif" alt="EducaFuturo Organization">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <span class="org-name">EducaFuturo</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card health">
+<<<<<<< HEAD:public/assets/index.html
       <img src="images/logos/Black_name.png" alt="SaludParaTodos Organization">
+=======
+      <img src="public/assets/images/photos/suraa.jpg" alt="SaludParaTodos Organization">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <span class="org-name">SaludParaTodos</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card social">
+<<<<<<< HEAD:public/assets/index.html
       <img src="images/logos/Logo_logo.png" alt="RedSolidaria Organization">
+=======
+      <img src="public/assets/images/photos/red solidara.jfif" alt="RedSolidaria Organization">
+>>>>>>> c0eb920334b83f98fe090812c4982e4b0a1d4e14:index.html
       <span class="org-name">RedSolidaria</span>
       <button class="org-info-btn">More information</button>
     </div>
@@ -93,9 +131,37 @@
 <!-- Incluye el footer externo -->
 <div id="footer-container"></div>
 
+<!-- Scripts -->
+<link rel="stylesheet" href="public/assets/css/global.css">
+<script src="public/assets/js/home.js"></script>
+<script src="/public/assets/js/header.js"></script>
+<script src="src/firebase/firebaseConfig.js"></script>
+
+
+<script>
+// Carga header y footer externos
+fetch('src/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('src/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+</script>
+
+<!-- Incluye el header externo -->
+<div id="header-container"></div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="public/assets/css/global.css">
+<script src="public/assets/js/home.js"></script>
+<script src="/public/assets/js/header.js"></script>
+<script src="src/firebase/firebaseConfig.js"></script>
+
+
+
+<!-- Incluye el footer externo -->
+<div id="footer-container"></div>
+
 
 <script>
 // Carga header y footer externos
 fetch('components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
 fetch('components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
 </script>
+
