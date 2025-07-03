@@ -36,18 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('theme') || 'light';
   setTheme(saved);
 
-  // --- Mostrar icono de perfil si logueado ---
+  // --- Manejo de sesión del usuario ---
   const profileLink = document.getElementById('profile-link');
   const loginBtn = document.getElementById('login-btn');
   const registerBtn = document.getElementById('register-btn');
-  if (localStorage.getItem('userLoggedIn') === 'true') {
-    if (profileLink) profileLink.style.display = 'inline-flex';
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  // Actualizar el header según el estado de sesión
+  if (Object.keys(user).length > 0) {
+    // Usuario logueado
+    if (profileLink) {
+      profileLink.style.display = 'inline-flex';
+      // Mostrar nombre del usuario en lugar del icono
+      profileLink.innerHTML = `
+        <span class="user-name">${user.name || user.email}</span>
+        <img src="/public/assets/images/icons/user.svg" alt="Profile" class="profile-icon">
+      `;
+    }
     if (loginBtn) loginBtn.style.display = 'none';
     if (registerBtn) registerBtn.style.display = 'none';
   } else {
+    // Usuario no logueado
     if (profileLink) profileLink.style.display = 'none';
     if (loginBtn) loginBtn.style.display = '';
     if (registerBtn) registerBtn.style.display = '';
+  }
+
+  // Event listener para el botón de perfil
+  if (profileLink) {
+    profileLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      showLogoutPopup();
+    });
   }
 
   // --- Traducción dinámica del header y menú ---
@@ -87,6 +107,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginBtn) loginBtn.textContent = t.login;
     if (registerBtn) registerBtn.textContent = t.register;
   }
+
+  // --- Función para mostrar popup de logout ---
+  function showLogoutPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'logout-popup';
+    popup.innerHTML = `
+      <div class="popup-content">
+        <h3>¿Estás seguro de querer cerrar sesión?</h3>
+        <div class="popup-buttons">
+          <button id="confirm-logout">Sí, cerrar sesión</button>
+          <button id="cancel-logout">Volver al inicio</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Event listeners para los botones
+    popup.querySelector('#confirm-logout').addEventListener('click', async () => {
+      try {
+        const res = await fetch('/api/logout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await res.json();
+        if (data.success) {
+          // Eliminar información del usuario
+          localStorage.removeItem('user');
+          // Redirigir a index.html
+          window.location.href = '/index.html';
+        }
+      } catch (err) {
+        console.error('Error al cerrar sesión:', err);
+      } finally {
+        popup.remove();
+      }
+    });
+
+    popup.querySelector('#cancel-logout').addEventListener('click', () => {
+      popup.remove();
+    });
+  }
+
   // --- Idioma por defecto inglés ---
   lang = localStorage.getItem('lang') || 'en';
   setLang(lang);
