@@ -8,7 +8,6 @@ const VOLUNTEERS = [
     categoria: 'Education',
     color: '#2563eb',
     colorHover: '#1d4ed8',
-<<<<<<< HEAD
     img: '/public/assets/images/photos/tutorias.png',
     desc: 'Help children and young people improve their academic performance.',
     descLarga: 'Be part of our team of volunteers for the Casa Esperanza Summer School and together we help strengthen the learning of the children and adolescents in our programs.',
@@ -17,15 +16,7 @@ const VOLUNTEERS = [
     requisitos: ['Over 16 years old',
     ' Knowledge in the subjects of: Spanish, mathematics, English, physics, chemistry and accounting.',
     ' Be responsible. committed and punctual.','- Reside in the provinces of Panama, Coclé, Colón, Herrera and Chiriquí.',
-    'Have good management of a group of children from 6 to 11 years old and adolescents from 12 to 17 years old.']
-=======
-    img: '../../public/assets/images/photos/.jpg',
-    desc: 'Ayuda a niños y jóvenes a mejorar su rendimiento escolar.',
-    descLarga: 'Como voluntario en Tutorías Escolares, apoyarás a estudiantes de primaria y secundaria en materias clave, motivando su aprendizaje y desarrollo personal.',
-    ubicacion: 'Ciudad de México',
-    mapa: '<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-99.1332%2C19.4326%2C-99.1332%2C19.4326&amp;layer=mapnik" style="width:100%;height:180px;border:0;"></iframe>',
-    requisitos: ['Ser mayor de 16 años', 'Compromiso mínimo de 3 meses', 'Gusto por la enseñanza']
->>>>>>> 4f1fa501b2b334fda9132aa717b34ce91e7c3608
+    'Have good management of a group of children from 6 to 11 years old and adolescents from 12 to 17 years old.'],
   },
   {
     id: 2,

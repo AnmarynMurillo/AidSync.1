@@ -4,7 +4,7 @@
 const TEAM = [
   {
     nombre: 'Juan Morales',
-    foto: '../../public/assets/images/team/juan.jpg',
+    foto: '../../public/assets/images/team/Juan.Morales.jpg',
     rol: 'Desarrollo',
     desc: 'Apasionado por la tecnología y el impacto social. Encargado del backend y la integración con Firebase.'
   },
@@ -223,7 +223,7 @@ const Team = [
   }
 ];
 
-const Carousel_Images= [
+const Carousel_Images = [
   '../../public/assets/images/team/momento1.jpg',
   '../../public/assets/images/team/momento2.jpg',
   '../../public/assets/images/team/momento3.jpg',
