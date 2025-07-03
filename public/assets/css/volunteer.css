@@ -108,8 +108,8 @@
 .modal-content {
   background: var(--color-card);
   border-radius: 1.2rem;
-  max-width: 600px;
-  width: 95vw;
+  max-width: 500px;
+  width:500px;
   padding: 2rem;
   position: relative;
   box-shadow: 0 8px 32px #0003;
@@ -134,8 +134,8 @@
   color: #222;
 }
 .modal-body img {
-  width: 100%;
-  max-height: 220px;
+  width:100%;
+  max-height: 160px;
   object-fit: cover;
   border-radius: 0.8rem;
   margin-bottom: 1rem;

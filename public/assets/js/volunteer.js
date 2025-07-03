@@ -4,16 +4,28 @@
 const VOLUNTEERS = [
   {
     id: 1,
-    nombre: 'Tutorías Escolares',
-    categoria: 'educacion',
+    nombre: 'Casa Esperanza/ tutoring',
+    categoria: 'Education',
     color: '#2563eb',
     colorHover: '#1d4ed8',
-    img: '../../public/assets/images/hero/educacion.jpg',
+<<<<<<< HEAD
+    img: '/public/assets/images/photos/tutorias.png',
+    desc: 'Help children and young people improve their academic performance.',
+    descLarga: 'Be part of our team of volunteers for the Casa Esperanza Summer School and together we help strengthen the learning of the children and adolescents in our programs.',
+    ubicacion: 'C. la Esperanza 70, Aguadulce, Provincia de Coclé',
+    mapa: '<iframe src="https://www.openstreetmap.org/?mlat=8.232854&mlon=-80.536808#map=17/8.232850/-80.536810" style="width:100%;height:180px;border:0;"></iframe>',
+    requisitos: ['Over 16 years old',
+    ' Knowledge in the subjects of: Spanish, mathematics, English, physics, chemistry and accounting.',
+    ' Be responsible. committed and punctual.','- Reside in the provinces of Panama, Coclé, Colón, Herrera and Chiriquí.',
+    'Have good management of a group of children from 6 to 11 years old and adolescents from 12 to 17 years old.']
+=======
+    img: '../../public/assets/images/photos/.jpg',
     desc: 'Ayuda a niños y jóvenes a mejorar su rendimiento escolar.',
     descLarga: 'Como voluntario en Tutorías Escolares, apoyarás a estudiantes de primaria y secundaria en materias clave, motivando su aprendizaje y desarrollo personal.',
     ubicacion: 'Ciudad de México',
     mapa: '<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-99.1332%2C19.4326%2C-99.1332%2C19.4326&amp;layer=mapnik" style="width:100%;height:180px;border:0;"></iframe>',
     requisitos: ['Ser mayor de 16 años', 'Compromiso mínimo de 3 meses', 'Gusto por la enseñanza']
+>>>>>>> 4f1fa501b2b334fda9132aa717b34ce91e7c3608
   },
   {
     id: 2,
@@ -21,7 +33,7 @@ const VOLUNTEERS = [
     categoria: 'salud',
     color: '#dc2626',
     colorHover: '#b91c1c',
-    img: '../../public/assets/images/hero/salud.jpg',
+    img: '/public/assets/images/photos/BRIGADA-MEDICA.jpg',
     desc: 'Participa en jornadas de salud y prevención en comunidades vulnerables.',
     descLarga: 'Únete a la Brigada Médica y contribuye a mejorar la salud de comunidades con atención básica, talleres y campañas de prevención.',
     ubicacion: 'Guadalajara, Jalisco',
@@ -34,7 +46,7 @@ const VOLUNTEERS = [
     categoria: 'ambiente',
     color: '#16a34a',
     colorHover: '#15803d',
-    img: '../../public/assets/images/hero/ambiente.jpg',
+    img:'/public/assets/images/photos/refores.png',
     desc: 'Colabora en la plantación y cuidado de árboles en zonas urbanas.',
     descLarga: 'Participa en actividades de reforestación, talleres ambientales y campañas de concientización para mejorar el entorno urbano.',
     ubicacion: 'Monterrey, Nuevo León',
@@ -47,7 +59,7 @@ const VOLUNTEERS = [
     categoria: 'bienestar',
     color: '#eab308',
     colorHover: '#ca8a04',
-    img: '../../public/assets/images/hero/bienestar.jpg',
+    img:  '/public/assets/images/photos/comedor.jpg',
     desc: 'Apoya en la preparación y entrega de alimentos a personas en situación vulnerable.',
     descLarga: 'Como voluntario en el Comedor Comunitario, ayudarás a preparar, servir y entregar alimentos, generando un impacto positivo en la comunidad.',
     ubicacion: 'Puebla, Puebla',
@@ -56,7 +68,7 @@ const VOLUNTEERS = [
   }
 ];
 
-const gallery = document.getElementById('volunteer-gallery');
+const gallery = document.getElementById('volunteer-gallerys');
 const modal = document.getElementById('volunteer-modal');
 const modalBody = modal.querySelector('.modal-body');
 const closeBtn = modal.querySelector('.modal-close');
