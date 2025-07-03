@@ -1,61 +1,34 @@
-// login.js - Login de usuarios AidSync
-
-document.getElementById('login-form').onsubmit = async function(e) {
+document.getElementById('login-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const user = document.getElementById('login-user').value.trim();
-  const pass = document.getElementById('login-pass').value;
+  const email = document.getElementById('login-user').value;
+  const password = document.getElementById('login-pass').value;
   const status = document.getElementById('login-status');
-  status.className = 'login-status';
+  status.textContent = 'Iniciando sesión...';
 
-  if (!user || !pass) {
-    status.textContent = 'Por favor, completa todos los campos.';
-    status.classList.add('error');
-    return;
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      status.textContent = 'Respuesta inesperada del servidor: ' + text;
+      return;
+    }
+
+    if (res.ok) {
+      localStorage.setItem('token', data.token);
+      status.textContent = '¡Inicio de sesión exitoso!';
+      window.location.href = 'index.html';
+    } else {
+      status.textContent = data.message || 'Error al iniciar sesión';
+    }
+  } catch (err) {
+    status.textContent = 'Error de red: ' + err.message;
   }
-
-  status.textContent = 'Verificando...';
-  status.classList.remove('error', 'success');
-  status.style.color = '#888';
-
-  // --- NUEVO: Verificar usuarios registrados en localStorage ---
-  let users = JSON.parse(localStorage.getItem('aidsync_users') || '[]');
-  const found = users.find(u => (u.usuario === user || u.email === user) && u.password === pass);
-  // Simulación de credenciales válidas
-  const validUser = found || user === 'voluntario' || user === 'empresa' || user === 'test@aidsync.org';
-  const validPass = found ? true : pass === '123456';
-
-  setTimeout(() => {
-    if (!validUser) {
-      status.textContent = 'El usuario no existe.';
-      status.classList.add('error');
-      return;
-    }
-    if (!validPass) {
-      status.textContent = 'Contraseña incorrecta.';
-      status.classList.add('error');
-      return;
-    }
-    // Geolocalización obligatoria
-    status.textContent = 'Solicitando ubicación...';
-    if (!navigator.geolocation) {
-      status.textContent = 'La geolocalización no es compatible con tu navegador.';
-      status.classList.add('error');
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        status.textContent = '¡Bienvenido! Redirigiendo...';
-        status.classList.add('success');
-        // Guardar login
-        localStorage.setItem('userLoggedIn', 'true');
-        setTimeout(() => {
-          window.location.href = 'map.html';
-        }, 1200);
-      },
-      err => {
-        status.textContent = 'Debes activar la ubicación para continuar.';
-        status.classList.add('error');
-      }
-    );
-  }, 1000);
-};
+});

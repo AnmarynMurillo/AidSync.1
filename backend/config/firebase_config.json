@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "expo-project-1040e",
+  "private_key_id": "e4b626bb625481eb21c46e00cacfea968f2fa1d3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCx+pWs7oR1CaMx\nBvXSOphXcKswpIUglOVBd+1ibvWilBqRIaZ/yws6ZLOq47lWTFqPye0Yrk25nP9c\nFlaw5oeIEj5KvkCvjQSKBkvri2/oTHgYYRYqKRQI8beMESiUP2ZdCCtVg5diOqLp\nLFme8EN36jEnM8ej0boKPThtnhcjoypPowizZxIu3ewKKDAuC7hssIF93BfGbG3U\nwyizhO0a0AnKyqG1eAPlDXY1fDHctnlMR54K1QyEmN9iB4A/UJ0obxDxeOB6xY+r\n1+50R+Uk8a76ie4WegG+4zJfsJCILXT4iO2t+VWpCr1PXqyBNTLC8CvqdmDwpmLv\njJqvHadBAgMBAAECggEAEbsWKDlG5uYD5QF9gekmfieSVnE9dgZ/ZGtPMew9+mlo\n0CabEMYoozOfFppDP46xwvtp7HiI88HpSsJK9qqwu+SdYhLcHOEen6WK8LdeebUM\njdk2PRMElPOHxqN6+HHsf74tmwJWFYoj6rjpYMUs44hoRzCIZhChyR1aPsluIrWW\nnpuaju7PgMCxCHurbvt32bShPvbDGOLAv8Y2/6LIrO4zw3hj63oZwq1yWtPUgWdj\niRKJvOg5yf/hrKfGo3bZEfOEBZ3O8+9ZvCYUHAHt6zhCRaWh6hOLl/UBP+62EDfa\no+VSInlCjzCbw5vJo7w6KOBijp4UhxE8NTyzLmohhQKBgQD4gRdUJ9c4mmFo2eEs\nAYhXAXmB3XExEoxBE1I2QcJhYq/gaStYMzUGOxPs0pMLJXcw55NwYbz4+K/sysH7\nFPaCZ+EIPxEIO8E1LV7ie5Iddp0EuOkv8y8ay7F9EtkHLJuHbRaNxnzFa/Ol+8U0\njQuCW+Bc5Nda9LfHOiJbb75STwKBgQC3WOht/GSVpZL87YPVcxgwFhJg6/ltDH7U\n3bZ5hw8wQRb/oshdFGU2LH7jNHqvPBf/P838W0OmdNQPx/PLsblS6IaVzq62p02I\nHVGNcEJFa6rUItAWBKbcnj4XIXpBw3qajDF7Pc+Rq/f130gtW0AU+KpHHwEKuQKs\nPJMMRT3ZbwKBgQCndy9GejbSoU8Fvta8tiewIoFE3/s4y7wS2rdrcvNQd5X4kEcy\ngAe6tDNgRCPtvgjNvzGf6W3VBppf49/Hmb/p76E50m5i8wnoETRBQm8cRePY29fh\nhWt4Dk8E75+r8wa4w+4QCvPogzBF6h5ipK5d4haX42uxkvsKWoXuwqYqhwKBgFWB\nnUROBQrVYSucCXOubYVfhcq1wmlc/nl/vO4IUskKUhN+czsVm+4b6kFD5EN9HyPn\nOcWLOo2SxqNleQlyJR/JWZrb/RcqBzqHkdUImZ+OiujMI4dhPAB/vC1Fa6Ln63HQ\nF/OF7Bvfu5BrRVoByGz/W0o352B80AZLabi7QhD5AoGBAOJNrFxi/ITNl4ASzppG\nYpF9aDI3raUdivOZmodBAitePjwSjHoR2HY7r1VZ8sIErhYycLOwV/zXSZ02VTFi\nxL0Up9GeTs712j7wNsbr8e326ZP+g/tIZOkzsLBEyKmWD+c9lBsmKEv3JgGRIN0w\nLJDph8qhjkmaUbW80GW3FrUf\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@expo-project-1040e.iam.gserviceaccount.com",
+  "client_id": "117973726457574955303",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40expo-project-1040e.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
