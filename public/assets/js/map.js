@@ -123,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Cargar header y footer ---
 function loadHeaderFooter() {
-  fetch('/src/components/header.html').then(r => r.text()).then(html => {
+  fetch('/public/assets/components/header.html').then(r => r.text()).then(html => {
     document.getElementById('header-container').innerHTML = html;
   });
-  fetch('/src/components/footer.html').then(r => r.text()).then(html => {
+  fetch('/public/assets/components/footer.html').then(r => r.text()).then(html => {
     document.getElementById('footer-container').innerHTML = html;
   });
 }
