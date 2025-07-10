@@ -1,3 +1,30 @@
+// --- Login híbrido: backend Flask o Firebase SDK ---
+
+// Configuración de tu proyecto Firebase (ajusta estos valores)
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ395j9EL5Nv81Q70Csc4zRKNp5e1Xrjo",
+  authDomain: "expo-project-1040e.firebaseapp.com",
+  databaseURL: "https://expo-project-1040e-default-rtdb.firebaseio.com",
+  projectId: "expo-project-1040e",
+  storageBucket: "expo-project-1040e.firebasestorage.app",
+  messagingSenderId: "813329495011",
+  appId: "1:813329495011:web:931d42531c471fe3e2e6d6",
+  measurementId: "G-QY0VQSB12F"
+};
+  // Puedes agregar storageBucket, messagingSenderId, appId s los tienes
+// Inicializador dinámico para el SDK de Firebase (usando módulos ES6, sin objeto global)
+let firebaseInitialized = false;
+let app, getAuth, signInWithEmailAndPassword;
+async function ensureFirebaseInit() {
+  if (firebaseInitialized) return;
+  const appModule = await import('https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js');
+  const authModule = await import('https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js');
+  app = appModule.initializeApp(firebaseConfig);
+  getAuth = authModule.getAuth;
+  signInWithEmailAndPassword = authModule.signInWithEmailAndPassword;
+  firebaseInitialized = true;
+}
+
 document.getElementById('login-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const email = document.getElementById('login-user').value;
@@ -12,42 +39,73 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
   status.textContent = 'Iniciando sesión...';
 
+  // Intenta primero con backend Flask
   try {
-    const res = await fetch('/api/login', {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 segundos
+    const res = await fetch('http://localhost:5000/login', {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, password }),
+      signal: controller.signal
     });
-
-    // Leer la respuesta como texto primero
+    clearTimeout(timeoutId);
     const text = await res.text();
-    
     try {
-      // Intentar parsear como JSON
       const data = JSON.parse(text);
-      
-      if (res.ok) {
-        if (data.success) {
-          // Guardar información del usuario en localStorage
-          localStorage.setItem('user', JSON.stringify(data.user));
-          
-          // Redirigir a index.html
-          window.location.href = '/index.html';
-        } else {
-          status.textContent = data.message || 'Error al iniciar sesión';
-        }
+      if (res.ok && data.success) {
+        localStorage.setItem('user', JSON.stringify({email: data.user}));
+        window.location.href = '/index.html';
       } else {
-        status.textContent = data.message || 'Error del servidor: ' + text;
+        status.textContent = data.message || 'Error al iniciar sesión';
       }
     } catch (parseError) {
-      // Si no se puede parsear como JSON
       status.textContent = 'Respuesta inválida del servidor: ' + text;
     }
   } catch (err) {
-    status.textContent = 'Error de red: ' + err.message;
+    // Si el backend no responde, usa el SDK de Firebase
+    status.textContent = 'Servidor backend no disponible, intentando login directo con Firebase...';
+    try {
+      await ensureFirebaseInit();
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const remember = document.getElementById('login-remember').checked;
+      if (remember) {
+        localStorage.setItem('user', JSON.stringify({email: user.email}));
+        sessionStorage.removeItem('user');
+      } else {
+        sessionStorage.setItem('user', JSON.stringify({email: user.email}));
+        localStorage.removeItem('user');
+      }
+      window.location.href = '/index.html';
+    } catch (firebaseError) {
+      // Manejo detallado de errores de Firebase Auth
+      let msg = '';
+      switch (firebaseError.code) {
+        case 'auth/user-not-found':
+          msg = 'No existe ninguna cuenta registrada con ese correo.';
+          break;
+        case 'auth/wrong-password':
+          msg = 'La contraseña es incorrecta.';
+          break;
+        case 'auth/invalid-email':
+          msg = 'El formato del correo es inválido.';
+          break;
+        case 'auth/user-disabled':
+          msg = 'Esta cuenta ha sido deshabilitada.';
+          break;
+        case 'auth/too-many-requests':
+          msg = 'Demasiados intentos fallidos. Intenta de nuevo más tarde.';
+          break;
+        case 'auth/network-request-failed':
+          msg = 'Error de red. Revisa tu conexión a internet.';
+          break;
+        default:
+          msg = 'Error al iniciar sesión: ' + (firebaseError.message || firebaseError.code);
+      }
+      status.textContent = msg;
+    }
   }
 });
 

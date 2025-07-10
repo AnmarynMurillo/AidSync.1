@@ -100,18 +100,8 @@
 
     <!-- Scripts -->
     <script src="public/assets/js/home.js"></script>
-    <script src="public/assets/js/header.js"></script>
     <script src="src/firebase/firebaseConfig.js"></script>
+    <script src="public/assets/components/header-loader.js"></script>
 
-    <script>
-        // Carga header y footer externos
-        fetch('public/assets/components/header.html')
-            .then(r => r.text())
-            .then(html => document.getElementById('header-container').innerHTML = html);
-        
-        fetch('public/assets/components/footer.html')
-            .then(r => r.text())
-            .then(html => document.getElementById('footer-container').innerHTML = html);
-    </script>
 </body>
 </html>
