@@ -98,6 +98,7 @@ function setLang(lang) {
   document.querySelector('.hero .carousel-caption h1').textContent = translations[lang].bienvenido;
   document.querySelector('.hero .carousel-caption p').textContent = translations[lang].descripcion;
   document.querySelector('.hero .carousel-caption .mantra').textContent = translations[lang].mantra;
+  updateCarouselCaption();
 }
 
 // --- Idioma por defecto inglés ---
@@ -131,7 +132,7 @@ function prevSlide() {
   showSlide(currentSlide);
 }
 function startCarousel() {
-  interval = setInterval(nextSlide, 4000);
+  interval = setInterval(nextSlide, 7000); // 7 segundos
 }
 function stopCarousel() {
   clearInterval(interval);
@@ -146,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.addEventListener('click', () => { stopCarousel(); prevSlide(); startCarousel(); });
     startCarousel();
   }
+  updateCarouselCaption();
 });
 
 // ---- Formulario de contacto ----
@@ -193,3 +195,26 @@ function setupHamburgerMenu() {
   }
 }
 document.addEventListener('DOMContentLoaded', setupHamburgerMenu);
+
+const carouselPhrases = {
+  en: [
+    "Empowering education for a brighter future.",
+    "Health and hope for every community.",
+    "Protecting our environment, together.",
+    "Caring for the wellbeing of all generations."
+  ],
+  es: [
+    "Impulsando la educación para un futuro brillante.",
+    "Salud y esperanza para cada comunidad.",
+    "Protegiendo nuestro ambiente, juntos.",
+    "Cuidando el bienestar de todas las generaciones."
+  ]
+};
+
+function updateCarouselCaption() {
+  const lang = localStorage.getItem('lang') || 'en';
+  const captions = document.querySelectorAll('.carousel-caption .carousel-phrase');
+  captions.forEach((el, idx) => {
+    el.textContent = carouselPhrases[lang][idx];
+  });
+}
