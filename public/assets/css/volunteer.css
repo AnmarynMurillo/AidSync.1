@@ -185,3 +185,30 @@
   .volunteer-gallery { grid-template-columns: 1fr; }
   .modal-content { padding: 1rem; }
 }
+#modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+#modal[aria-hidden="false"] {
+  display: flex;
+}
+#modalBody {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  position: relative;
+}
+#mensaje {
+  display: none;
+  margin-top: 10px;
+  background-color: #d1fae5;
+  padding: 10px;
+  border-radius: 8px;
+  color: #065f46;
+  font-weight: bold;
+}

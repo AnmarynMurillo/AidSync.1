@@ -1,7 +1,6 @@
 
 <!-- Incluye el header externo -->
 <div id="header-container"></div>
-<<<<<<<<< Temporary merge branch 1:index.html
 <!--HELLOSS-->
 <!-- Hero Section -->
 <section class="hero">
@@ -47,7 +46,7 @@
     </div>
     <div class="carousel-slide" data-area="social">
       <img src="images/logos/Logo_logo.png" alt="Social Wellbeing">
->>>>>>>>> Temporary merge branch 2:public/assets/index.html
+
       <div class="carousel-caption"></div>
     </div>
     <button class="carousel-btn prev">&#10094;</button>
@@ -77,25 +76,22 @@
   <h2>Supported Organizations</h2>
   <div class="org-list-grid">
     <div class="org-card environment">
-<<<<<<<<< Temporary merge branch 1:index.html
+
       <img src="public/assets/images/photos/ecovida.png" alt="EcoVida Organization">
-=========
       <img src="images/logos/Logo_logo.png" alt="EcoVida Organization">
->>>>>>>>> Temporary merge branch 2:public/assets/index.html
       <span class="org-name">EcoVida</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card education">
-<<<<<<<<< Temporary merge branch 1:index.html
+
       <img src="public/assets/images/photos/ecofuturo.jfif" alt="EducaFuturo Organization">
-=========
+
       <img src="images/logos/White_name.png" alt="EducaFuturo Organization">
->>>>>>>>> Temporary merge branch 2:public/assets/index.html
       <span class="org-name">EducaFuturo</span>
       <button class="org-info-btn">More information</button>
     </div>
     <div class="org-card health">
-<<<<<<<<< Temporary merge branch 1:index.html
+
       <img src="public/assets/images/photos/suraa.jpg" alt="SaludParaTodos Organization">
 =========
       <img src="images/logos/Black_name.png" alt="SaludParaTodos Organization">
@@ -149,8 +145,8 @@ fetch('src/components/footer.html').then(r=>r.text()).then(html=>document.getEle
 
 <!-- Scripts -->
 <link rel="stylesheet" href="public/assets/css/global.css">
-<script src="public/assets/js/home.js"></script>
-<script src="/public/assets/js/header.js"></script>
+<script src="public/assets/components/js/home.js"></script>
+<script src="/public/assets/components/js/header.js"></script>
 <script src="src/firebase/firebaseConfig.js"></script>
 
 
@@ -161,7 +157,7 @@ fetch('src/components/footer.html').then(r=>r.text()).then(html=>document.getEle
 
 <script>
 // Carga header y footer externos
-fetch('components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
-fetch('components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+fetch('/public/assets/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('/public/assets/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
 </script>
 
