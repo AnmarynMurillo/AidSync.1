@@ -1,3 +1,4 @@
+<!--este archivo es login.html y es el archivo de la pagina de login-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,8 +46,13 @@
   <script src="/public/assets/js/login.js"></script>
 <script>
 // Carga header y footer externos
-fetch('public/assets/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
-fetch('public/assets/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+<<<<<<< HEAD
+fetch('/public/assets/components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('/public/assets/components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+=======
+fetch('../components/header.html').then(r=>r.text()).then(html=>document.getElementById('header-container').innerHTML=html);
+fetch('../components/footer.html').then(r=>r.text()).then(html=>document.getElementById('footer-container').innerHTML=html);
+>>>>>>> 2e67ec2317f1c4d08b0a9aa45f85163e07acbd10
 </script>
 </body>
 </html>

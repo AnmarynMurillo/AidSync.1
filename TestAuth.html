@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Firebase Auth | AidSync</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .info {
+      background-color: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    .user-info {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      background-color: #e9ecef;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px 5px 0 0;
+    }
+    .tab.active {
+      background-color: #007bff;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .radio-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+    }
+    .radio-group input[type="radio"] {
+      width: auto;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 Firebase Auth Test - AidSync</h1>
+    
+    <div class="tabs">
+      <button class="tab active" data-tab="register">Registro</button>
+      <button class="tab" data-tab="login">Login</button>
+      <button class="tab" data-tab="status">Estado</button>
+    </div>
+
+    <!-- Registro -->
+    <div id="register" class="tab-content active">
+      <h2>Registro de Usuario</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="reg-nombre">Nombre completo:</label>
+          <input type="text" id="reg-nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-edad">Edad:</label>
+          <input type="number" id="reg-edad" min="16" max="120" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email:</label>
+          <input type="email" id="reg-email" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-usuario">Usuario:</label>
+          <input type="text" id="reg-usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Contraseña:</label>
+          <input type="password" id="reg-password" minlength="6" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password2">Confirmar contraseña:</label>
+          <input type="password" id="reg-password2" minlength="6" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-area">Área de interés:</label>
+          <select id="reg-area" required>
+            <option value="">Selecciona una opción</option>
+            <option value="educacion">Educación</option>
+            <option value="salud">Salud</option>
+            <option value="medioambiente">Medio Ambiente</option>
+            <option value="bienestar">Bienestar Social</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tipo de usuario:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tipo" value="voluntario" required> Voluntario</label>
+            <label><input type="radio" name="tipo" value="empresa" required> Organización</label>
+          </div>
+        </div>
+        <button type="submit" id="registerBtn">Registrar Usuario</button>
+      </form>
+      <div id="registerStatus"></div>
+    </div>
+
+    <!-- Login -->
+    <div id="login" class="tab-content">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Contraseña:</label>
+          <input type="password" id="login-password" required>
+        </div>
+        <button type="submit" id="loginBtn">Iniciar Sesión</button>
+      </form>
+      <div id="loginStatus"></div>
+    </div>
+
+    <!-- Estado -->
+    <div id="status" class="tab-content">
+      <h2>Estado de la Sesión</h2>
+      <div id="userInfo">
+        <p>No hay usuario autenticado</p>
+      </div>
+      <button onclick="logout()" id="logoutBtn" style="display: none;">Cerrar Sesión</button>
+      <button onclick="testBackend()" id="testBtn" style="display: none;">Probar Backend</button>
+      <div id="backendStatus"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK v11+ (modular) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAJ395j9EL5Nv81Q70Csc4zRKNp5e1Xrjo",
+      authDomain: "expo-project-1040e.firebaseapp.com",
+      databaseURL: "https://expo-project-1040e-default-rtdb.firebaseio.com",
+      projectId: "expo-project-1040e",
+      storageBucket: "expo-project-1040e.firebasestorage.app",
+      messagingSenderId: "813329495011",
+      appId: "1:813329495011:web:931d42531c471fe3e2e6d6",
+      measurementId: "G-QY0VQSB12F"
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Variables globales
+    let currentUser = null;
+
+    // Función para mostrar tabs
+    function showTab(tabName, tabElement) {
+      // Ocultar todos los contenidos
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Mostrar el tab seleccionado
+      document.getElementById(tabName).classList.add('active');
+      if (tabElement) tabElement.classList.add('active');
+    }
+
+    // Manejo de tabs usando event delegation
+    document.querySelector('.tabs').addEventListener('click', function(e) {
+      if (e.target.classList.contains('tab')) {
+        showTab(e.target.dataset.tab, e.target);
+      }
+    });
+
+    // Monitor de autenticación
+    onAuthStateChanged(auth, user => {
+      currentUser = user;
+      updateUserInfo();
+    });
+
+    // Actualizar información del usuario
+    function updateUserInfo() {
+      const userInfo = document.getElementById('userInfo');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const testBtn = document.getElementById('testBtn');
+      
+      if (currentUser) {
+        userInfo.innerHTML = `
+          <div class="user-info">
+            <h3>✅ Usuario Autenticado</h3>
+            <p><strong>UID:</strong> ${currentUser.uid}</p>
+            <p><strong>Email:</strong> ${currentUser.email}</p>
+            <p><strong>Verificado:</strong> ${currentUser.emailVerified ? 'Sí' : 'No'}</p>
+            <p><strong>Nombre:</strong> ${currentUser.displayName || 'No establecido'}</p>
+            <p><strong>Último acceso:</strong> ${new Date(currentUser.metadata.lastSignInTime).toLocaleString()}</p>
+          </div>
+        `;
+        logoutBtn.style.display = 'block';
+        testBtn.style.display = 'block';
+      } else {
+        userInfo.innerHTML = '<p>❌ No hay usuario autenticado</p>';
+        logoutBtn.style.display = 'none';
+        testBtn.style.display = 'none';
+      }
+    }
+
+    // Registro de usuario
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const nombre = document.getElementById('reg-nombre').value.trim();
+      const edad = parseInt(document.getElementById('reg-edad').value);
+      const email = document.getElementById('reg-email').value.trim();
+      const usuario = document.getElementById('reg-usuario').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const password2 = document.getElementById('reg-password2').value;
+      const area = document.getElementById('reg-area').value;
+      const tipo = document.querySelector('input[name="tipo"]:checked')?.value;
+      
+      const status = document.getElementById('registerStatus');
+      const btn = document.getElementById('registerBtn');
+      
+      // Validaciones
+      if (password !== password2) {
+        showStatus(status, 'Las contraseñas no coinciden', 'error');
+        return;
+      }
+      
+      if (!tipo) {
+        showStatus(status, 'Selecciona un tipo de usuario', 'error');
+        return;
+      }
+      
+      btn.disabled = true;
+      showStatus(status, 'Registrando usuario...', 'info');
+      
+      try {
+        // Crear usuario en Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Actualizar perfil
+        await updateProfile(user, {
+          displayName: nombre
+        });
+        
+        // Guardar datos adicionales en Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+          nombre: nombre,
+          edad: edad,
+          email: email,
+          usuario: usuario,
+          area: area,
+          tipo: tipo,
+          fechaRegistro: serverTimestamp()
+        });
+        
+        showStatus(status, '✅ Usuario registrado exitosamente!', 'success');
+        document.getElementById('registerForm').reset();
+        
+        // Cambiar a tab de estado
+        setTimeout(() => showTab('status'), 1000);
+        
+      } catch (error) {
+        console.error('Error en registro:', error);
+        showStatus(status, `❌ Error: ${getErrorMessage(error)}`, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Login de usuario
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      
+      const status = document.getElementById('loginStatus');
+      const btn = document.getElementById('loginBtn');
+      
+      btn.disabled = true;
+      showStatus(status, 'Iniciando sesión...', 'info');
+      
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Obtener ID Token
+        const idToken = await user.getIdToken();
+        
+        showStatus(status, '✅ Sesión iniciada exitosamente!', 'success');
+        document.getElementById('loginForm').reset();
+        
+        // Cambiar a tab de estado
+        setTimeout(() => showTab('status'), 1000);
+        
+      } catch (error) {
+        console.error('Error en login:', error);
+        showStatus(status, `❌ Error: ${getErrorMessage(error)}`, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Cerrar sesión
+    async function logout() {
+      try {
+        await signOut(auth);
+        showStatus(document.getElementById('backendStatus'), '✅ Sesión cerrada exitosamente', 'success');
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        showStatus(document.getElementById('backendStatus'), `❌ Error al cerrar sesión: ${error.message}`, 'error');
+      }
+    }
+
+    // Probar backend
+    async function testBackend() {
+      if (!currentUser) {
+        showStatus(document.getElementById('backendStatus'), '❌ No hay usuario autenticado', 'error');
+        return;
+      }
+      
+      const status = document.getElementById('backendStatus');
+      showStatus(status, 'Probando conexión con backend...', 'info');
+      
+      try {
+        // Obtener ID Token
+        const idToken = await currentUser.getIdToken();
+        
+        // Probar endpoint de mascotas (GET)
+        const response = await fetch('http://localhost:5000/api/pets', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          showStatus(status, `✅ Backend funcionando! Respuesta: ${JSON.stringify(data)}`, 'success');
+        } else {
+          showStatus(status, `❌ Error del backend: ${data.error || 'Error desconocido'}`, 'error');
+        }
+        
+      } catch (error) {
+        console.error('Error al probar backend:', error);
+        showStatus(status, `❌ Error de conexión: ${error.message}`, 'error');
+      }
+    }
+
+    // Utilidades
+    function showStatus(element, message, type) {
+      element.innerHTML = `<div class="status ${type}">${message}</div>`;
+    }
+
+    function getErrorMessage(error) {
+      const errorMessages = {
+        'auth/email-already-in-use': 'El email ya está registrado',
+        'auth/invalid-email': 'Email no válido',
+        'auth/weak-password': 'Contraseña muy débil',
+        'auth/user-not-found': 'Usuario no encontrado',
+        'auth/wrong-password': 'Contraseña incorrecta',
+        'auth/too-many-requests': 'Demasiados intentos, intenta más tarde',
+        'auth/network-request-failed': 'Error de conexión'
+      };
+      return errorMessages[error.code] || error.message;
+    }
+
+    // Mostrar información inicial
+    updateUserInfo();
+  </script>
+</body>
+</html>
