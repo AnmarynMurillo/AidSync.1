@@ -12,7 +12,8 @@ const VOLUNTEERS = [
     desc: 'Help children and young people improve their academic performance.',
     descLarga: 'Be part of our team of volunteers for the Casa Esperanza Summer School and together we help strengthen the learning of the children and adolescents in our programs.',
     ubicacion: 'C. la Esperanza 70, Aguadulce, Provincia de Coclé',
-    mapa: '<iframe src="https://www.openstreetmap.org/?mlat=8.232854&mlon=-80.536808#map=17/8.232850/-80.536810" style="width:100%;height:180px;border:0;"></iframe>',
+    mapa: `<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+    src="https://www.openstreetmap.org/export/embed.html?bbox=-80.5381%2C8.2319%2C-80.5355%2C8.2338&amp;layer=mapnik&amp;marker=8.23285%2C-80.53681"  style="border:1px solid black"></iframe>`,
     requisitos: ['Over 16 years old',
     ' Knowledge in the subjects of: Spanish, mathematics, English, physics, chemistry and accounting.',
     ' Be responsible. committed and punctual.','- Reside in the provinces of Panama, Coclé, Colón, Herrera and Chiriquí.',
