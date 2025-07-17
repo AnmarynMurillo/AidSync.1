@@ -1,3 +1,4 @@
+<!-- Header responsive con menú hamburguesa alineado a la izquierda y nav principal centrado, logo entre About us y Volunteer -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -6,14 +7,36 @@
   <link rel="icon" href="/public/assets/images/logos/logito.ico" type="imagen/x-icon">
   <link rel="stylesheet" href="/public/assets/css/global.css">
 </head>
+<body>
+  <!-- Header principal -->
 <header class="main-header sticky-header">
-  <div class="header-left">
-    <a href="/index.html" class="logo-link">
-      <img src="/public/assets/images/logos/Black_name.png" alt="AidSync Logo" class="header-logo">
-    </a>
-  </div>
-  <div class="header-right">
-    <nav class="main-menu">
+    <!-- Menú hamburguesa alineado a la izquierda -->
+    <button class="hamburger" id="hamburger-menu" aria-label="Menú" style="position: absolute; left: 0; top: 0; margin: 0; z-index: 1001; background: none; border: none; outline: none;">
+      <span class="hamburger-lines">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+    <!-- Menú de navegación principal (solo desktop/tablet) -->
+    <nav class="main-nav" id="main-nav">
+      <div class="nav-center">
+        <a href="/index.html">Home</a>
+        <a href="/public/assets/pages/about.html">About us</a>
+        <!-- Logo en el centro del nav -->
+        <a href="/index.html" class="logo-link nav-logo">
+          <img src="/public/assets/images/logos/Black_name.png" alt="AidSync Logo" class="header-logo">
+        </a>
+        <a href="/public/assets/pages/volunteer.html">Volunteer</a>
+        <a href="/public/assets/pages/donate.html">Donate</a>
+      </div>
+      <div class="nav-auth">
+        <a href="/public/assets/pages/register.html" class="btn register">Register</a>
+        <a href="/public/assets/pages/login.html" class="btn login">Login</a>
+      </div>
+    </nav>
+    <!-- Menú lateral hamburguesa (solo móvil)
+    <nav class="main-menu" id="main-menu" style="display: none; position: fixed; left: 0; top: 0; height: 100vh; width: 250px; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.1); z-index: 1000; flex-direction: column; padding-top: 60px;">
       <a href="/index.html">Home</a>
       <a href="/public/assets/pages/volunteer.html">Volunteer</a>
       <a href="/public/assets/pages/donate.html">Donate</a>
@@ -22,7 +45,13 @@
       <a href="/public/assets/pages/blog.html">Blog</a>
       <a href="/public/assets/pages/calendar.html">Calendar</a>
       <a href="/public/assets/pages/map.html">Map</a>
+      <a href="/public/assets/pages/register.html" class="btn register">Register</a>
+      <a href="/public/assets/pages/login.html" class="btn login">Login</a>
     </nav>
+<<<<<<< HEAD
+  </header> -->
+  <!-- Script para abrir/cerrar el menú hamburguesa -->
+=======
     <a href="/public/assets/pages/login.html" class="btn login" id="login-btn">Login</a>
     <a href="/public/assets/pages/register.html" class="btn register" id="register-btn">Register</a>
     <button class="lang-switch" id="lang-switch" aria-label="Switch language">
@@ -51,5 +80,7 @@
       <a href="/public/assets/pages/map.html">Map</a>
     </nav>
   </div>
+>>>>>>> 10da25663a673612d9a4aa0d9ebebb6cc1b94c73
   <script src="/public/assets/components/header.js"></script>
-</header>
+</body>
+</html>
