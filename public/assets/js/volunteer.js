@@ -21,15 +21,16 @@ const VOLUNTEERS = [
   },
   {
     id: 2,
-    nombre: 'Brigada Médica',
+    nombre: 'Global Brigades',
     categoria: 'salud',
     color: '#dc2626',
     colorHover: '#b91c1c',
     img: '/public/assets/images/photos/BRIGADA-MEDICA.jpg',
-    desc: 'Participa en jornadas de salud y prevención en comunidades vulnerables.',
-    descLarga: 'Únete a la Brigada Médica y contribuye a mejorar la salud de comunidades con atención básica, talleres y campañas de prevención.',
+    desc: 'Global Brigades Panama is an international organization that connects volunteers with vulnerable communities to provide medical, dental, and health education services through short-term brigades.',
+    descLarga: 'Become a volunteer and help bring vital healthcare and education to communities in need.',
     ubicacion: 'Guadalajara, Jalisco',
-    mapa: '<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-103.3496%2C20.6597%2C-103.3496%2C20.6597&amp;layer=mapnik" style="width:100%;height:180px;border:0;"></iframe>',
+    mapa: `<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+    src="https://www.openstreetmap.org/export/embed.html?bbox=-79.5377%2C8.9903%2C-79.5327%2C8.9933&amp;layer=mapnik&amp;marker=8.991856529315962%2C-79.53523216208009"  style="border:1px solid black"></iframe>`,
     requisitos: ['Mayoría de edad', 'Experiencia en salud (deseable)', 'Actitud de servicio']
   },
   {
