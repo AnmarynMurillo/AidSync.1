@@ -1,130 +1,90 @@
-#este archivo es app.py y es el archivo principal de la aplicacion
+# app.py
+# ---
+# Backend principal para autenticación con Flask y Firebase
+# ---
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
+import os
 from dotenv import load_dotenv
 
-# Importar los servicios
-from src.auth.auth_service import (
-    login_user, 
-    register_user, 
-    get_current_user, 
-    verify_token,
-    token_required
-)
-from src.database.firestore_service import get_user_pets, create_pet_for_user
-
-# Cargar variables de entorno
+# Inicializa variables de entorno
 load_dotenv()
 
+# Inicializa la app Flask
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY', 'supersecretkey')  # Cambia esto en producción
 CORS(app)
 
-# ------------------- RUTAS DE AUTENTICACIÓN -------------------
+# Inicializa Firebase (importa el módulo que creamos)
+from src.auth.firebase_admin_init import *
+from firebase_admin import auth
 
-@app.route('/api/auth/login', methods=['POST'])
+# --- Endpoint para login ---
+@app.route('/login', methods=['POST'])
 def login():
     """
-    Endpoint de login - principalmente para validar tokens
+    Recibe email y password, verifica en Firebase y responde si el usuario existe o no.
     """
-    return login_user(request)
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+    if not email or not password:
+        return jsonify({'success': False, 'message': 'Email y contraseña requeridos'}), 400
+    try:
+        # Firebase no permite verificar password directamente desde admin SDK,
+        # así que normalmente esto se hace en el frontend con Firebase JS SDK.
+        # Pero para fines de backend, puedes usar Firebase REST API:
+        import requests
+        api_key = os.getenv('FIREBASE_API_KEY')
+        url = f'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={api_key}'
+        payload = {
+            'email': email,
+            'password': password,
+            'returnSecureToken': True
+        }
+        r = requests.post(url, json=payload)
+        resp = r.json()
+        if 'idToken' in resp:
+            # Usuario autenticado correctamente
+            session['user'] = resp['email']
+            return jsonify({'success': True, 'message': 'Login exitoso', 'user': resp['email']}), 200
+        else:
+            return jsonify({'success': False, 'message': resp.get('error', {}).get('message', 'Usuario o contraseña incorrectos')}), 401
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
 
-@app.route('/api/auth/register', methods=['POST'])
+# --- Endpoint para registro ---
+@app.route('/register', methods=['POST'])
 def register():
     """
-    Endpoint de registro - crear usuario en Firebase Auth
+    Recibe email y password, crea usuario en Firebase.
     """
-    return register_user(request)
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+    if not email or not password:
+        return jsonify({'success': False, 'message': 'Email y contraseña requeridos'}), 400
+    try:
+        user = auth.create_user(email=email, password=password)
+        return jsonify({'success': True, 'message': 'Usuario creado', 'uid': user.uid}), 201
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
 
-@app.route('/api/auth/user', methods=['GET'])
-def get_user():
-    """
-    Obtener información del usuario actual
-    Requiere token de autenticación
-    """
-    return get_current_user(request)
+# --- Endpoint para cerrar sesión ---
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user', None)
+    return jsonify({'success': True, 'message': 'Sesión cerrada'}), 200
 
-@app.route('/api/auth/verify', methods=['GET'])
-def verify():
-    """
-    Verificar si un token es válido
-    """
-    return verify_token(request)
-
-# ------------------- RUTAS DE MASCOTAS (PROTEGIDAS) -------------------
-
-@app.route('/api/pets', methods=['POST'])
-@token_required
-def create_pet():
-    """
-    Crear una nueva mascota
-    Requiere autenticación
-    """
-    return create_pet_for_user(request)
-
-@app.route('/api/pets', methods=['GET'])
-@token_required
-def get_pets():
-    """
-    Obtener mascotas del usuario actual
-    Requiere autenticación
-    """
-    return get_user_pets(request)
-
-# ------------------- RUTAS DE PRUEBA -------------------
-
-@app.route('/')
-def home():
-    """
-    Endpoint de prueba
-    """
-    return jsonify({
-        'message': 'AidSync API funcionando!',
-        'version': '1.0.0',
-        'endpoints': {
-            'auth': {
-                'POST /api/auth/login': 'Validar token de login',
-                'POST /api/auth/register': 'Registrar nuevo usuario',
-                'GET /api/auth/user': 'Obtener usuario actual (requiere token)',
-                'GET /api/auth/verify': 'Verificar token (requiere token)'
-            },
-            'pets': {
-                'POST /api/pets': 'Crear mascota (requiere token)',
-                'GET /api/pets': 'Obtener mascotas (requiere token)'
-            }
-        }
-    })
-
-@app.route('/api/test', methods=['GET'])
-@token_required
-def test_auth():
-    """
-    Endpoint de prueba que requiere autenticación
-    """
-    user = request.current_user
-    return jsonify({
-        'message': '¡Autenticación exitosa!',
-        'user': {
-            'uid': user['uid'],
-            'email': user.get('email'),
-            'email_verified': user.get('email_verified', False)
-        },
-        'timestamp': user.get('iat')
-    })
-
-# ------------------- MANEJO DE ERRORES -------------------
-
-@app.errorhandler(401)
-def unauthorized(error):
-    return jsonify({'error': 'No autorizado'}), 401
-
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({'error': 'Endpoint no encontrado'}), 404
-
-@app.errorhandler(500)
-def internal_error(error):
-    return jsonify({'error': 'Error interno del servidor'}), 500
+# --- Endpoint para verificar si usuario está logueado ---
+@app.route('/check_session', methods=['GET'])
+def check_session():
+    user = session.get('user')
+    if user:
+        return jsonify({'logged_in': True, 'user': user})
+    else:
+        return jsonify({'logged_in': False}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True)
