@@ -1,53 +1,53 @@
 // header.js - Funcionalidad para el header de AidSync
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Menú hamburguesa
-  const hamburger = document.getElementById('hamburger-menu');
-  const dropdown = document.getElementById('dropdown-menu');
-  if (hamburger && dropdown) {
-    hamburger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      dropdown.classList.toggle('show');
-    });
-    document.addEventListener('click', function(e) {
-      if (!dropdown.contains(e.target) && !hamburger.contains(e.target)) {
-        dropdown.classList.remove('show');
-      }
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') dropdown.classList.remove('show');
-    });
-  }
+// Script para abrir/cerrar el menú hamburguesa
+// Selecciona el botón hamburguesa y el menú principal
+const hamburger = document.getElementById('hamburger-menu');
+const menu = document.getElementById('main-menu');
 
-  // Botón de tema (luna/sol)
-  const btn = document.getElementById('theme-switch');
-  const themeIcon = document.getElementById('theme-icon');
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    if (themeIcon) themeIcon.src = theme === 'dark' ? 'public/assets/images/icons/sun.svg' : 'public/assets/images/icons/moon.svg';
-  }
-  function toggleTheme() {
-    const current = localStorage.getItem('theme') || 'light';
-    setTheme(current === 'light' ? 'dark' : 'light');
-  }
-  if (btn) btn.onclick = toggleTheme;
-  // Inicializa tema guardado
-  const saved = localStorage.getItem('theme') || 'light';
-  setTheme(saved);
+// Estado del menú (abierto/cerrado)
+let menuOpen = false;
 
-  // Función para obtener el usuario actual (soporta localStorage y sessionStorage)
-  function getCurrentUser() {
-    let user = localStorage.getItem('user');
-    if (!user) user = sessionStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+// Función para abrir/cerrar el menú
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    menu.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Evita scroll en el fondo
+  } else {
+    menu.style.display = 'none';
+    document.body.style.overflow = '';
   }
+}
 
-  // Detectar usuario logueado
-  let user = getCurrentUser();
+// Evento click en el botón hamburguesa
+hamburger.addEventListener('click', toggleMenu);
+
+// Cierra el menú si se hace click fuera del menú (opcional)
+document.addEventListener('click', function(event) {
+  if (menuOpen && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+    toggleMenu();
+  }
+});
+
+// Ajusta el menú al tamaño de la pantalla
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 900) {
+    menu.style.display = '';
+    document.body.style.overflow = '';
+    menuOpen = false;
+  }
+});
+
+// --- Funcionalidad de sesión, traducción y logout ---
+document.addEventListener('DOMContentLoaded', function() {
+  // --- Manejo de sesión del usuario ---
   const profileLink = document.getElementById('profile-link');
   const loginBtn = document.getElementById('login-btn');
   const registerBtn = document.getElementById('register-btn');
+  const langBtn = document.getElementById('lang-btn');
+  let lang = localStorage.getItem('lang') || 'en';
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   // Actualizar el header según el estado de sesión
   if (user) {
@@ -112,25 +112,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainMenu = document.querySelector('.main-menu');
     if (mainMenu) {
       const links = mainMenu.querySelectorAll('a');
-      links[0].textContent = t.home;
-      links[1].textContent = t.volunteer;
-      links[2].textContent = t.donate;
-      links[3].textContent = t.about;
-      links[4].textContent = t.contact;
-      links[5].textContent = t.blog;
-      links[6].textContent = t.calendar;
-      links[7].textContent = t.map;
+      if (links.length >= 8) {
+        links[0].textContent = t.home;
+        links[1].textContent = t.volunteer;
+        links[2].textContent = t.donate;
+        links[3].textContent = t.about;
+        links[4].textContent = t.contact;
+        links[5].textContent = t.blog;
+        links[6].textContent = t.calendar;
+        links[7].textContent = t.map;
+      }
     }
     const dropdown = document.getElementById('dropdown-menu');
     if (dropdown) {
       const dlinks = dropdown.querySelectorAll('a');
-      dlinks[0].textContent = t.volunteer;
-      dlinks[1].textContent = t.donate;
-      dlinks[2].textContent = t.about;
-      dlinks[3].textContent = t.contact;
-      dlinks[4].textContent = t.blog;
-      dlinks[5].textContent = t.calendar;
-      dlinks[6].textContent = t.map;
+      if (dlinks.length >= 7) {
+        dlinks[0].textContent = t.volunteer;
+        dlinks[1].textContent = t.donate;
+        dlinks[2].textContent = t.about;
+        dlinks[3].textContent = t.contact;
+        dlinks[4].textContent = t.blog;
+        dlinks[5].textContent = t.calendar;
+        dlinks[6].textContent = t.map;
+      }
     }
     if (loginBtn) loginBtn.textContent = t.login;
     if (registerBtn) registerBtn.textContent = t.register;
@@ -158,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
-        
         const data = await res.json();
         if (data.success) {
           // Eliminar información del usuario
@@ -178,8 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Idioma por defecto inglés ---
-  lang = localStorage.getItem('lang') || 'en';
+  // --- Idioma por defecto ---
   setLang(lang);
   translateHeader(lang);
   if (langBtn) {
@@ -187,8 +189,21 @@ document.addEventListener('DOMContentLoaded', () => {
       lang = lang === 'es' ? 'en' : 'es';
       setLang(lang);
       translateHeader(lang);
+      // Cambia bandera
+      const img = langBtn.querySelector('img');
+      if (img) {
+        img.src = lang === 'es' ? '/public/assets/images/icons/lang.svg' : '/public/assets/images/icons/lang-en.svg';
+      }
     };
-    // Cambia bandera
-    langBtn.querySelector('img').src = lang === 'es' ? '/public/assets/images/icons/lang.svg' : '/public/assets/images/icons/lang-en.svg';
+    // Cambia bandera al cargar
+    const img = langBtn.querySelector('img');
+    if (img) {
+      img.src = lang === 'es' ? '/public/assets/images/icons/lang.svg' : '/public/assets/images/icons/lang-en.svg';
+    }
+  }
+
+  function setLang(l) {
+    localStorage.setItem('lang', l);
   }
 });
+// Fin del script para menú hamburguesa

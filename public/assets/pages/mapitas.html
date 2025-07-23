@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa en Tiempo Real</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 400px; width: 100%; }
+  </style>
+</head>
+<body>
+
+<h2>Mi Ubicación en Tiempo Real</h2>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([0, 0], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const marker = L.marker([0, 0]).addTo(map);
+
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(function(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      marker.setLatLng([lat, lng]);
+      map.setView([lat, lng], 15);
+    }, function() {
+      alert('No se pudo obtener tu ubicación');
+    });
+  } else {
+    alert('Geolocalización no soportada en este navegador');
+  }
+</script>
+
+</body>
+</html>
