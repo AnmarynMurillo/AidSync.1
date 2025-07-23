@@ -44,7 +44,7 @@ body {
 /* ==== AidSync HEADER MODERNO AJUSTADO Y ANIMADO ==== */
 .main-header, .sticky-header, .aid-header {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1500px;
   min-width: 320px;
   margin: 0 auto;
   height: 88px;
@@ -56,7 +56,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.5rem 0 1.5rem;
+  padding: 0 2.2rem 0 1.5rem;
   border-bottom: 3px solid var(--color-support1);
   z-index: 1000;
   transition: background var(--transition), color var(--transition), box-shadow var(--transition);
@@ -64,7 +64,7 @@ body {
 @media (max-width: 1700px) {
   .main-header, .sticky-header, .aid-header {
     max-width: 98vw;
-    padding: 0 1rem;
+    padding: 0 0 0.5rem;
   }
 }
 @media (max-width: 700px) {
@@ -251,6 +251,24 @@ body {
 .header-logo:hover {
   filter: drop-shadow(0 4px 16px #16a08588) brightness(1.1);
 }
+.header-left .app-name {
+  font-size: 1,5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1.5px;
+  margin-left: 0.5rem;
+  font-family: 'Poppins', 'Nunito', Arial, sans-serif;
+  text-shadow: 0 2px 8px #003d6622;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+@media (max-width: 700px) {
+  .header-left .app-name {
+    font-size: 1.2rem;
+    margin-left: 0.3rem;
+  }
+}
 .main-menu a {
   color: #fff;
   text-decoration: none;
@@ -351,7 +369,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 1600px;
-  margin: 0 auto 2.5rem auto;
+  margin: 0 auto 0.5rem auto;
   height: 80vh;
   min-height: 420px;
   background: var(--color-support2);
@@ -400,7 +418,6 @@ body {
   color: #fff;
   text-align: center;
   text-shadow: 0 2px 8px #000a;
-  background: rgba(0,61,102,0.18);
   padding: 2rem 2.5rem;
   border-radius: 1rem;
   box-shadow: 0 2px 16px #003d6622;
@@ -420,7 +437,7 @@ body {
   background: rgba(22,160,133,0.7);
   padding: 0.5rem 1.5rem;
   border-radius: 0.7rem;
-  box-shadow: 0 2px 8px #003d6622;
+  box-shadow: 0 2px 8px;
   margin: 0 auto;
   max-width: 90vw;
   line-height: 1.2;
