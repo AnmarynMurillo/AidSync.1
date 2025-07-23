@@ -65,29 +65,33 @@
     </section>
 
     <!-- Supported Organizations -->
-    <section class="supported-orgs" aria-label="Supported Organizations">
+    <section class="supported-orgs new-supported-orgs" aria-label="Supported Organizations">
         <h2>Supported Organizations</h2>
-        <div class="org-list-grid">
-            <div class="org-card environment">
-                <img src="public/assets/images/supported organizations/EcoVida.png" alt="EcoVida Organization">
-                <span class="org-name">EcoVida</span>
-                <button class="org-info-btn">More information</button>
+        <div class="org-carousel-container">
+            <button class="org-carousel-btn prev" aria-label="Previous organizations">&#10094;</button>
+            <div class="org-list-scroll" id="org-carousel">
+                <div class="org-card environment">
+                    <img src="public/assets/images/supported organizations/EcoVida.png" alt="EcoVida Organization">
+                    <span class="org-name">EcoVida</span>
+                    <button class="org-info-btn">More information</button>
+                </div>
+                <div class="org-card education">
+                    <img src="public/assets/images/supported organizations/educa futuro.jpg" alt="Educa Futuro Organization">
+                    <span class="org-name">Educa Futuro</span>
+                    <button class="org-info-btn">More information</button>
+                </div>
+                <div class="org-card health">
+                    <img src="public/assets/images/supported organizations/salud para todos.jpg" alt="Salud Para Todos Organization">
+                    <span class="org-name">Salud Para Todos</span>
+                    <button class="org-info-btn">More information</button>
+                </div>
+                <div class="org-card social">
+                    <img src="public/assets/images/supported organizations/red solidaria.jpg" alt="Red Solidaria Organization">
+                    <span class="org-name">Red Solidaria</span>
+                    <button class="org-info-btn">More information</button>
+                </div>
             </div>
-            <div class="org-card education">
-                <img src="public/assets/images/supported organizations/educa futuro.jpg" alt="Educa Futuro Organization">
-                <span class="org-name">Educa Futuro</span>
-                <button class="org-info-btn">More information</button>
-            </div>
-            <div class="org-card health">
-                <img src="public/assets/images/supported organizations/salud para todos.jpg" alt="Salud Para Todos Organization">
-                <span class="org-name">Salud Para Todos</span>
-                <button class="org-info-btn">More information</button>
-            </div>
-            <div class="org-card social">
-                <img src="public/assets/images/supported organizations/red solidaria.jpg" alt="Red Solidaria Organization">
-                <span class="org-name">Red Solidaria</span>
-                <button class="org-info-btn">More information</button>
-            </div>
+            <button class="org-carousel-btn next" aria-label="Next organizations">&#10095;</button>
         </div>
     </section>
 
@@ -118,6 +122,17 @@
         fetch('public/assets/components/footer.html')
             .then(r => r.text())
             .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+    <script>
+        // Carrusel de organizaciones con flechas
+        const orgCarousel = document.getElementById('org-carousel');
+        const prevBtn = document.querySelector('.org-carousel-btn.prev');
+        const nextBtn = document.querySelector('.org-carousel-btn.next');
+        const scrollAmount = 350; // Ajusta según el ancho de la tarjeta
+        if (orgCarousel && prevBtn && nextBtn) {
+          prevBtn.onclick = () => orgCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          nextBtn.onclick = () => orgCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
