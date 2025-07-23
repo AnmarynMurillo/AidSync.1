@@ -3,70 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AidSync - Connect Volunteers with Those in Need</title>
+    <title>AidSync - Empowering Connections</title>
     <link rel="stylesheet" href="public/assets/css/global.css">
-    <link rel="icon" href="/public/assets/images/logos/logito.ico" type="imagen/x-icon">
-    
+    <link rel="icon" href="/public/assets/images/logos/logito.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Incluye el header externo -->
+    <!-- Header -->
     <div id="header-container"></div>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" aria-label="AidSync Welcome">
         <div class="hero-carousel">
             <div class="carousel-slide" data-area="education">
                 <img src="public/assets/images/carrusel/education carrusel.png" alt="Education">
                 <div class="carousel-caption">
-                    <h1>Welcome</h1>
-                    <span class="carousel-phrase"></span>
+                    <h1>Empowering Connections</h1>
+                    <span class="carousel-phrase">Empowering education for a brighter future.</span>
                 </div>
             </div>
             <div class="carousel-slide" data-area="health">
                 <img src="public/assets/images/carrusel/salud carrusel.png" alt="Health">
                 <div class="carousel-caption">
-                    <h1>Welcome</h1>
-                    <span class="carousel-phrase"></span>
+                    <h1>Empowering Connections</h1>
+                    <span class="carousel-phrase">Health and hope for every community.</span>
                 </div>
             </div>
             <div class="carousel-slide" data-area="environment">
                 <img src="public/assets/images/carrusel/environment carrusel.png" alt="Environment">
                 <div class="carousel-caption">
-                    <h1>Welcome</h1>
-                    <span class="carousel-phrase"></span>
+                    <h1>Empowering Connections</h1>
+                    <span class="carousel-phrase">Protecting our environment, together.</span>
                 </div>
             </div>
             <div class="carousel-slide" data-area="social">
                 <img src="public/assets/images/carrusel/adultos carrusel.png" alt="Social Wellbeing">
                 <div class="carousel-caption">
-                    <h1>Welcome</h1>
-                    <span class="carousel-phrase"></span>
+                    <h1>Empowering Connections</h1>
+                    <span class="carousel-phrase">Caring for the wellbeing of all generations.</span>
                 </div>
             </div>
-            <button class="carousel-btn prev">&#10094;</button>
-            <button class="carousel-btn next">&#10095;</button>
+            <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
+            <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
         </div>
     </section>
 
     <!-- What We Do Section -->
-    <section class="what-we-do">
+    <section class="what-we-do" aria-label="What AidSync Does">
         <h2>What does AidSync do?</h2>
-        <p>We connect people willing to help with those in need, making volunteering and donating easy and safe.</p>
+        <p>AidSync is a digital bridge between volunteers and organizations that need help. Our platform connects people who want to give their time with those who need support. We make volunteering simple, modern, and accessible for everyone.</p>
     </section>
 
     <!-- Volunteer Categories -->
-    <section class="volunteer-categories">
+    <section class="volunteer-categories" aria-label="Volunteer Areas">
         <h2>Volunteer Areas</h2>
         <div class="categories">
-            <button class="category-btn blue">Education</button>
-            <button class="category-btn red">Health</button>
-            <button class="category-btn green">Environment</button>
-            <button class="category-btn yellow">Social Wellbeing</button>
+            <button class="category-btn blue" aria-label="Education">Education</button>
+            <button class="category-btn red" aria-label="Health">Health</button>
+            <button class="category-btn green" aria-label="Environment">Environment</button>
+            <button class="category-btn yellow" aria-label="Social Wellbeing">Social Wellbeing</button>
         </div>
     </section>
 
     <!-- Supported Organizations -->
-    <section class="supported-orgs">
+    <section class="supported-orgs" aria-label="Supported Organizations">
         <h2>Supported Organizations</h2>
         <div class="org-list-grid">
             <div class="org-card environment">
@@ -93,26 +92,26 @@
     </section>
 
     <!-- Contact Form -->
-    <section class="contact-form">
+    <section class="contact-form" aria-label="Contact AidSync">
         <h2>Contact</h2>
-        <form id="contactForm">
+        <form id="contactForm" autocomplete="off">
             <div class="form-row-inline">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="message" placeholder="Message" required></textarea>
+                <input type="text" name="name" placeholder="Name" required aria-label="Name">
+                <input type="email" name="email" placeholder="Email" required aria-label="Email">
+                <textarea name="message" placeholder="Message" required aria-label="Message"></textarea>
             </div>
             <button type="submit">Send</button>
         </form>
     </section>
 
-    <!-- Incluye el footer externo -->
+    <!-- Footer -->
     <div id="footer-container"></div>
 
     <!-- Scripts -->
     <script src="public/assets/js/home.js"></script>
     <script src="src/firebase/firebaseConfig.js"></script>
     <script>
-        // Carga header y footer externos
+        // Load external header and footer
         fetch('public/assets/components/header.html')
             .then(r => r.text())
             .then(html => document.getElementById('header-container').innerHTML = html);
