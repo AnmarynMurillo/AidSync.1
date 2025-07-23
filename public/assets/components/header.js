@@ -2,40 +2,71 @@
 
 // Script para abrir/cerrar el menú hamburguesa
 // Selecciona el botón hamburguesa y el menú principal
-const hamburger = document.getElementById('hamburger-menu');
+const hamburger = document.getElementById('hamburger');
 const menu = document.getElementById('main-menu');
+const header = document.querySelector('.main-header');
+const backdrop = document.getElementById('menu-backdrop');
 
 // Estado del menú (abierto/cerrado)
 let menuOpen = false;
 
-// Función para abrir/cerrar el menú
-function toggleMenu() {
-  menuOpen = !menuOpen;
+function toggleMenu(forceState) {
+  if (typeof forceState === 'boolean') menuOpen = forceState;
+  else menuOpen = !menuOpen;
   if (menuOpen) {
-    menu.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Evita scroll en el fondo
+    menu.classList.add('show');
+    hamburger.classList.add('open');
+    if (backdrop) backdrop.classList.remove('hide');
+    document.body.style.overflow = 'hidden';
   } else {
-    menu.style.display = 'none';
+    menu.classList.remove('show');
+    hamburger.classList.remove('open');
+    if (backdrop) backdrop.classList.add('hide');
     document.body.style.overflow = '';
   }
 }
 
-// Evento click en el botón hamburguesa
-hamburger.addEventListener('click', toggleMenu);
-
-// Cierra el menú si se hace click fuera del menú (opcional)
-document.addEventListener('click', function(event) {
-  if (menuOpen && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+if (hamburger) {
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
     toggleMenu();
+  });
+  hamburger.addEventListener('mouseenter', function(e) {
+    if (!menuOpen) toggleMenu(true);
+  });
+}
+if (menu && hamburger) {
+  menu.addEventListener('mouseleave', function(e) {
+    if (menuOpen) toggleMenu(false);
+  });
+  hamburger.addEventListener('mouseleave', function(e) {
+    setTimeout(function() {
+      if (!menu.matches(':hover')) {
+        if (menuOpen) toggleMenu(false);
+      }
+    }, 120);
+  });
+}
+if (backdrop) {
+  backdrop.addEventListener('click', function() {
+    if (menuOpen) toggleMenu(false);
+  });
+}
+window.addEventListener('click', function(event) {
+  if (menuOpen && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+    toggleMenu(false);
   }
 });
-
-// Ajusta el menú al tamaño de la pantalla
 window.addEventListener('resize', function() {
-  if (window.innerWidth > 900) {
-    menu.style.display = '';
-    document.body.style.overflow = '';
-    menuOpen = false;
+  if (menuOpen) {
+    toggleMenu(false);
+  }
+});
+// Header sticky con transición de color al hacer scroll
+window.addEventListener('scroll', function() {
+  if (header) {
+    if (window.scrollY > 10) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
   }
 });
 
@@ -50,21 +81,42 @@ document.addEventListener('DOMContentLoaded', function() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   // Actualizar el header según el estado de sesión
-  if (Object.keys(user).length > 0) {
+  if (user) {
     // Usuario logueado
     if (profileLink) {
       profileLink.style.display = 'inline-flex';
-      // Mostrar nombre del usuario en lugar del icono
+      // Mostrar email del usuario
       profileLink.innerHTML = `
-        <span class="user-name">${user.name || user.email}</span>
+        <span class="user-name">${user.email || user.name}</span>
         <img src="/public/assets/images/icons/user.svg" alt="Profile" class="profile-icon">
       `;
     }
     if (loginBtn) loginBtn.style.display = 'none';
     if (registerBtn) registerBtn.style.display = 'none';
+    // Crear botón de logout si no existe
+    if (!document.getElementById('logout-btn')) {
+      const logoutBtn = document.createElement('a');
+      logoutBtn.href = '#';
+      logoutBtn.className = 'btn logout';
+      logoutBtn.id = 'logout-btn';
+      logoutBtn.textContent = 'Cerrar sesión';
+      logoutBtn.style.marginLeft = '10px';
+      logoutBtn.onclick = function(e) {
+        e.preventDefault();
+        // Eliminar usuario del localStorage
+        localStorage.removeItem('user');
+        // Opcional: llamar al backend para cerrar sesión
+        fetch('http://localhost:5000/logout', { method: 'POST', credentials: 'include' });
+        // Recargar la página para actualizar el header
+        window.location.reload();
+      };
+      document.querySelector('.header-right').appendChild(logoutBtn);
+    }
   } else {
     // Usuario no logueado
     if (profileLink) profileLink.style.display = 'none';
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.remove();
     if (loginBtn) loginBtn.style.display = '';
     if (registerBtn) registerBtn.style.display = '';
   }
