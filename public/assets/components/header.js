@@ -81,21 +81,42 @@ document.addEventListener('DOMContentLoaded', function() {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   // Actualizar el header según el estado de sesión
-  if (Object.keys(user).length > 0) {
+  if (user) {
     // Usuario logueado
     if (profileLink) {
       profileLink.style.display = 'inline-flex';
-      // Mostrar nombre del usuario en lugar del icono
+      // Mostrar email del usuario
       profileLink.innerHTML = `
-        <span class="user-name">${user.name || user.email}</span>
+        <span class="user-name">${user.email || user.name}</span>
         <img src="/public/assets/images/icons/user.svg" alt="Profile" class="profile-icon">
       `;
     }
     if (loginBtn) loginBtn.style.display = 'none';
     if (registerBtn) registerBtn.style.display = 'none';
+    // Crear botón de logout si no existe
+    if (!document.getElementById('logout-btn')) {
+      const logoutBtn = document.createElement('a');
+      logoutBtn.href = '#';
+      logoutBtn.className = 'btn logout';
+      logoutBtn.id = 'logout-btn';
+      logoutBtn.textContent = 'Cerrar sesión';
+      logoutBtn.style.marginLeft = '10px';
+      logoutBtn.onclick = function(e) {
+        e.preventDefault();
+        // Eliminar usuario del localStorage
+        localStorage.removeItem('user');
+        // Opcional: llamar al backend para cerrar sesión
+        fetch('http://localhost:5000/logout', { method: 'POST', credentials: 'include' });
+        // Recargar la página para actualizar el header
+        window.location.reload();
+      };
+      document.querySelector('.header-right').appendChild(logoutBtn);
+    }
   } else {
     // Usuario no logueado
     if (profileLink) profileLink.style.display = 'none';
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.remove();
     if (loginBtn) loginBtn.style.display = '';
     if (registerBtn) registerBtn.style.display = '';
   }
