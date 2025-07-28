@@ -108,8 +108,11 @@
 .modal-content {
   background: var(--color-card);
   border-radius: 1.2rem;
-  max-width: 500px;
-  width:500px;
+  max-width: 90%;
+  width: 600px;
+  height: 400px;
+  overflow-y: auto; /* Scroll vertical si el contenido es más alto que 200px */
+  border: 1px solid #ccc;
   padding: 2rem;
   position: relative;
   box-shadow: 0 8px 32px #0003;
@@ -126,7 +129,7 @@
   background: none;
   border: none;
   font-size: 2rem;
-  color: #888;
+  color: turquoise;
   cursor: pointer;
   transition: color 0.2s;
 }
