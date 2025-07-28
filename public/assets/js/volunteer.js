@@ -109,9 +109,9 @@ function openModal(vol) {
     <div class="modal-desc">${vol.descLarga}</div>
     <div class="modal-map">${vol.mapa}</div>
     <ul class="modal-reqs">
-      ${vol.requisitos.map(r => `<li>${r}</li>`).join('')}
+      ${vol.requisitos.map(r => `<li>${translateRequirement(r)}</li>`).join('')}
     </ul>
-    <button class="modal-signup">Inscribirse</button>
+    <button class="modal-signup">Sign Up</button>
   `;
   modal.setAttribute('aria-hidden', 'false');
   modal.focus();
@@ -137,3 +137,22 @@ filterBtns.forEach(btn => {
 // Inicialización
 renderCards();
 filterBtns[0].classList.add('active');
+
+// Helper function to translate requirements to English
+function translateRequirement(req) {
+  const translations = {
+    'Mayoría de edad': 'Over 18 years old',
+    'Experiencia en salud (deseable)': 'Experience in health (desirable)',
+    'Actitud de servicio': 'Service attitude',
+    'Ser mayor de 15 años': 'Over 15 years old',
+    'Gusto por la naturaleza': 'Interest in nature',
+    'Disponibilidad fines de semana': 'Available on weekends',
+    'Empatía y responsabilidad': 'Empathy and responsibility',
+    'Trabajo en equipo': 'Teamwork',
+    '- Reside in the provinces of Panama, Coclé, Colón, Herrera and Chiriquí.': 'Reside in the provinces of Panama, Coclé, Colón, Herrera, and Chiriquí.',
+    ' Be responsible. committed and punctual.': 'Be responsible, committed, and punctual.',
+    ' Knowledge in the subjects of: Spanish, mathematics, English, physics, chemistry and accounting.': 'Knowledge in Spanish, mathematics, English, physics, chemistry, and accounting.',
+    'Have good management of a group of children from 6 to 11 years old and adolescents from 12 to 17 years old.': 'Good management of groups of children (6-11) and adolescents (12-17).'
+  };
+  return translations[req] || req;
+}
