@@ -8,7 +8,11 @@ const VOLUNTEERS = [
     categoria: 'Education',
     color: '#2563eb',
     colorHover: '#1d4ed8',
+<<<<<<< HEAD
     img: '/public/assets/images/volunteer/casaEsperanza.jpg',
+=======
+    img: '../images/hero/tutorias.png',
+>>>>>>> 38de150de28215f6a5bd604fa584bf281e686a44
     desc: 'Help children and young people improve their academic performance.',
     descLarga: 'Be part of our team of volunteers for the Casa Esperanza Summer School and together we help strengthen the learning of the children and adolescents in our programs.',
     ubicacion: 'C. la Esperanza 70, Aguadulce, Provincia de Coclé',
@@ -25,7 +29,11 @@ const VOLUNTEERS = [
     categoria: 'salud',
     color: '#dc2626',
     colorHover: '#b91c1c',
+<<<<<<< HEAD
     img: '/public/assets/images/volunteer/Brigadas.jpg',
+=======
+    img: '../images/hero/BRIGADA-MEDICA.jpg',
+>>>>>>> 38de150de28215f6a5bd604fa584bf281e686a44
     desc: 'Global Brigades Panama is an international organization that connects volunteers with vulnerable communities to provide medical, dental, and health education services through short-term brigades.',
     descLarga: 'Become a volunteer and help bring vital healthcare and education to communities in need.',
     ubicacion: 'Guadalajara, Jalisco',
@@ -38,9 +46,15 @@ const VOLUNTEERS = [
     categoria: 'ambiente',
     color: '#16a34a',
     colorHover: '#15803d',
+<<<<<<< HEAD
     img:'/public/assets/images/volunteer/Reforestacion.jpeg',
     desc: 'Join as a volunteer for reforestation events or school/community campaigns..',
     descLarga: ' It is a nonprofit working in Bahía Piñas, Darién, to support reforestation, education, and community health in one of the most remote areas of Panama.',
+=======
+    img:'../images/hero/refores.png',
+    desc: 'Colabora en la plantación y cuidado de árboles en zonas urbanas.',
+    descLarga: 'Participa en actividades de reforestación, talleres ambientales y campañas de concientización para mejorar el entorno urbano.',
+>>>>>>> 38de150de28215f6a5bd604fa584bf281e686a44
     ubicacion: 'Monterrey, Nuevo León',
     mapa:'<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-79.5513%2C8.9785%2C-79.5473%2C8.9815&amp;layer=mapnik&amp;marker=8.980028423107049%2C-79.54932847557309" style="border:1px solid black"></iframe>',
     requisitos: ['Commitment to the environmental cause','Availability of time',
@@ -52,12 +66,21 @@ const VOLUNTEERS = [
     categoria: 'bienestar',
     color: '#eab308',
     colorHover: '#ca8a04',
+<<<<<<< HEAD
     img:  '/public/assets/images/volunteer/Bnaco.webp',
     desc: ' is a non-profit organization that combats hunger and malnutrition by rescuing surplus food and distributing it to vulnerable communities throughout Panama.',
     descLarga: 'Join us as a volunteer and support the collection, sorting, and delivery of food to those in need.',
     ubicacion: 'Vía Circunvalación, Las Mañanitas, Tocumen, Panamá',
     mapa: '<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"  src="https://www.openstreetmap.org/export/embed.html?bbox=-79.3999%2C9.0873%2C-79.3959%2C9.0903&layer=mapnik&marker=9.088846170013202%2C-79.3978560319548"  style="border:1px solid black"></iframe>',
     requisitos: ['Strong social commitment and willingness to help', 'Be at least 16 years old (or younger with permission)','Availability (weekdays or weekends)','Teamwork and collaborative attitude','Follow hygiene and safety rules','Attend an orientation or information session', 'Be punctual and comply with assigned schedules','Wear appropriate clothing (closed shoes, no loose accessories)']
+=======
+    img:  '../images/hero/comedor.jpg',
+    desc: 'Apoya en la preparación y entrega de alimentos a personas en situación vulnerable.',
+    descLarga: 'Como voluntario en el Comedor Comunitario, ayudarás a preparar, servir y entregar alimentos, generando un impacto positivo en la comunidad.',
+    ubicacion: 'Puebla, Puebla',
+    mapa: '<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-98.2063%2C19.0414%2C-98.2063%2C19.0414&amp;layer=mapnik" style="width:100%;height:180px;border:0;"></iframe>',
+    requisitos: ['Mayoría de edad', 'Empatía y responsabilidad', 'Trabajo en equipo']
+>>>>>>> 38de150de28215f6a5bd604fa584bf281e686a44
   }
 ];
 
