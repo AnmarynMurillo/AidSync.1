@@ -15,7 +15,7 @@
     <section class="hero" aria-label="AidSync Welcome">
         <div class="hero-carousel">
             <div class="carousel-slide" data-area="education">
-                <img src="public/assets/images/carrusel/education carrusel.png" alt="Education">
+                <img src="public/assets/images/carrusel/Educacion.jpg" alt="Education">
                 <div class="carousel-caption">
                     <h1>Empowering Connections</h1>
                     <span class="carousel-phrase">Empowering education for a brighter future.</span>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="carousel-slide" data-area="environment">
-                <img src="public/assets/images/carrusel/environment carrusel.png" alt="Environment">
+                <img src="public/assets/images/carrusel/environment.jpg" alt="Environment">
                 <div class="carousel-caption">
                     <h1>Empowering Connections</h1>
                     <span class="carousel-phrase">Protecting our environment, together.</span>
@@ -60,9 +60,19 @@
             <button class="category-btn blue" aria-label="Education">Education</button>
             <button class="category-btn red" aria-label="Health">Health</button>
             <button class="category-btn green" aria-label="Environment">Environment</button>
-            <button class="category-btn yellow" aria-label="Social Wellbeing">Social Wellbeing</button>
+            <button class="category-btn yellow" aria-label="Social Welfare">Social Welfare</button>
         </div>
     </section>
+
+    <!-- Modal para áreas de ayuda -->
+    <div class="category-modal-backdrop" id="category-modal-backdrop" tabindex="-1" aria-hidden="true">
+      <div class="category-modal" role="dialog" aria-modal="true">
+        <button class="modal-close" aria-label="Close">&times;</button>
+        <div class="modal-body">
+          <!-- Se rellena dinámicamente -->
+        </div>
+      </div>
+    </div>
 
     <!-- Supported Organizations -->
     <section class="supported-orgs new-supported-orgs" aria-label="Supported Organizations">
