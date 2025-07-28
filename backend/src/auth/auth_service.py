@@ -8,7 +8,7 @@ import json
 
 # Inicializar Firebase solo si no está inicializado
 if not firebase_admin._apps:
-    cred = credentials.Certificate('backend/config/firebase_config.json')
+    cred = credentials.Certificate('/backend/config/firebase_config.json')
     firebase_admin.initialize_app(cred)
 
 # ------------------- DECORADOR PARA VERIFICAR TOKEN -------------------
