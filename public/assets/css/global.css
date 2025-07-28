@@ -373,7 +373,7 @@ body {
   height: 80vh;
   min-height: 420px;
   background: var(--color-support2);
-  border-radius: 1.5rem;
+  border-radius: 0 !important;
   box-shadow: 0 6px 32px #003d6622;
   overflow: hidden;
   display: flex;
@@ -407,7 +407,7 @@ body {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.85);
-  border-radius: 1.5rem;
+  border-radius: 0 !important;
   transition: object-fit 0.2s;
 }
 .carousel-caption {
@@ -473,7 +473,8 @@ body {
 .what-we-do {
   padding: 3rem 2rem 2rem 2rem;
   text-align: center;
-  background: var(--color-support2);
+  background: linear-gradient(120deg, var(--color-primary) 0%, var(--color-accent) 35%, var(--color-support1) 70%, var(--color-support2) 100%) !important;
+  color: #fff !important;
   border-radius: 1.2rem;
   margin: 2rem auto 2rem auto;
   max-width: 900px;
@@ -487,7 +488,8 @@ body {
   letter-spacing: 0.5px;
 }
 .what-we-do p {
-  color: var(--color-text);
+  color: #fff !important;
+  text-shadow: 0 2px 8px #003d6622;
   font-size: 1.18rem;
   font-weight: 500;
   max-width: 700px;
@@ -529,7 +531,7 @@ body {
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  color: #fff;
+  color: #fff !important;
   box-shadow: 0 2px 8px #003d6611;
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   background: var(--color-primary);
@@ -538,7 +540,10 @@ body {
 .category-btn.blue { background: var(--color-education); }
 .category-btn.red { background: var(--color-health); }
 .category-btn.green { background: var(--color-environment); }
-.category-btn.yellow { background: var(--color-social); color: #222; }
+.category-btn.yellow {
+  background: var(--color-social);
+  color: #fff !important;
+}
 .category-btn:hover {
   transform: scale(1.07);
   box-shadow: 0 4px 16px #003d6622;
@@ -941,6 +946,11 @@ body {
   gap: 2.5rem;
   scroll-snap-type: x mandatory;
   padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.org-list-scroll::-webkit-scrollbar {
+  display: none;
 }
 .org-carousel-btn {
   background: var(--color-accent);
@@ -1050,4 +1060,51 @@ body {
     width: 60px;
     height: 60px;
   }
+}
+
+/* Modal para áreas de ayuda (estilo base, se agregará estructura en index.html) */
+.category-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.category-modal-backdrop.active {
+  display: flex;
+}
+.category-modal {
+  background: #fff;
+  border-radius: 1.2rem;
+  max-width: 90vw;
+  width: 420px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 32px #003d6622;
+  color: var(--color-primary);
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s;
+}
+.category-modal .modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-accent);
+  cursor: pointer;
+}
+.category-modal h3 {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.category-modal p {
+  color: var(--color-primary);
+  font-size: 1.08rem;
+  font-weight: 500;
 }
