@@ -49,16 +49,9 @@ const VOLUNTEERS = [
     categoria: 'ambiente',
     color: '#16a34a',
     colorHover: '#15803d',
-<<<<<<< HEAD
-    img:'../images/hero/refores.png',
-    desc: 'Colabora en la plantación y cuidado de árboles en zonas urbanas.',
-    descLarga: 'Participa en actividades de reforestación, talleres ambientales y campañas de concientización para mejorar el entorno urbano.',
-    ubicacion: 'Monterrey, Nuevo León',
-=======
     desc: 'Join as a volunteer for reforestation events or school/community campaigns..',
     descLarga: ' It is a nonprofit working in Bahía Piñas, Darién, to support reforestation, education, and community health in one of the most remote areas of Panama.',
     ubicacion: 'Llanos de Curundu, Edificio 1992 A-B, Ancón, Ciudad de Panamá, Panamá.',
->>>>>>> 7f2977cae532da34b6ef1cae335f0267338b4646
     mapa:'<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-79.5513%2C8.9785%2C-79.5473%2C8.9815&amp;layer=mapnik&amp;marker=8.980028423107049%2C-79.54932847557309" style="border:1px solid black"></iframe>',
     requisitos: ['Commitment to the environmental cause','Availability of time',
     'Physical ability','Minimum age (18 years or younger with authorization)','Teamwork and positive attitude', 'Participation in informational or orientation sessions', 'Compliance with safety protocols'],
@@ -70,21 +63,12 @@ const VOLUNTEERS = [
     categoria: 'bienestar',
     color: '#eab308',
     colorHover: '#ca8a04',
-<<<<<<< HEAD
-    img:  '../images/hero/comedor.jpg',
-    desc: 'Apoya en la preparación y entrega de alimentos a personas en situación vulnerable.',
-    descLarga: 'Como voluntario en el Comedor Comunitario, ayudarás a preparar, servir y entregar alimentos, generando un impacto positivo en la comunidad.',
-    ubicacion: 'Puebla, Puebla',
-    mapa: '<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-98.2063%2C19.0414%2C-98.2063%2C19.0414&amp;layer=mapnik" style="width:100%;height:180px;border:0;"></iframe>',
-    requisitos: ['Mayoría de edad', 'Empatía y responsabilidad', 'Trabajo en equipo']
-=======
     desc: ' It is a non-profit organization that combats hunger and malnutrition by rescuing surplus food and distributing it to vulnerable communities throughout Panama.',
     descLarga: 'Join us as a volunteer and support the collection, sorting, and delivery of food to those in need.',
     ubicacion: 'Vía Circunvalación, Las Mañanitas, Tocumen, Panamá',
     mapa: '<iframe width="100%" height="180" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"  src="https://www.openstreetmap.org/export/embed.html?bbox=-79.3999%2C9.0873%2C-79.3959%2C9.0903&layer=mapnik&marker=9.088846170013202%2C-79.3978560319548"  style="border:1px solid black"></iframe>',
     requisitos: ['Strong social commitment and willingness to help', 'Be at least 16 years old (or younger with permission)','Availability (weekdays or weekends)','Teamwork and collaborative attitude','Follow hygiene and safety rules','Attend an orientation or information session', 'Be punctual and comply with assigned schedules','Wear appropriate clothing (closed shoes, no loose accessories)'],
     img:  '../images/hero/comedor.jpg',
->>>>>>> 7f2977cae532da34b6ef1cae335f0267338b4646
   }
 ];
 
