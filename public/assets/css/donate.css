@@ -171,10 +171,119 @@
   border-radius: 0.8rem;
   overflow: hidden;
 }
+/* Banner Donaciones */
+.donate-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #eaf4f5 0%, #f7faff 100%);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px #0001;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.donate-banner-content {
+  max-width: 700px;
+  text-align: center;
+}
+.donate-banner-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--color-primary, #2563eb);
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+.donate-banner-desc {
+  font-size: 1.25rem;
+  color: #444;
+  font-weight: 500;
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .donate-banner {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
+  .donate-banner-title {
+    font-size: 1.3rem;
+  }
+  .donate-banner-desc {
+    font-size: 1rem;
+  }
+}
 @media (max-width: 900px) {
   .donate-gallery { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
   .donate-gallery { grid-template-columns: 1fr; }
   .modal-content { padding: 1rem; }
+}
+
+/* Detalles adicionales en el modal */
+.modal-details {
+  margin: 1.2rem 0 1.5rem 0;
+  background: #f7faff;
+  border-radius: 0.7rem;
+  padding: 1rem 1.2rem;
+  color: #234;
+  font-size: 1rem;
+  box-shadow: 0 1px 6px #0001;
+}
+.modal-details a {
+  color: #2563eb;
+  text-decoration: underline;
+  word-break: break-all;
+}
+.modal-details div {
+  margin-bottom: 0.3rem;
+}
+
+/* Métodos de pago visuales */
+.modal-payment-methods {
+  display: flex;
+  gap: 1rem;
+  margin: 1.2rem 0 1.5rem 0;
+  align-items: center;
+}
+.payment-method-btn {
+  background: #eaf4f5;
+  color: #234;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 1.7rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #0001;
+  transition: background 0.2s, color 0.2s;
+}
+.payment-method-btn.selected {
+  background: #2563eb;
+  color: #fff;
+}
+.payment-fields {
+  margin-top: 1rem;
+  width: 100%;
+}
+.field-group {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.input-card-number, .input-card-expiry, .input-card-cvv {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.5rem;
+}
+.input-card-number { flex: 1; min-width: 160px; }
+.input-card-expiry { width: 80px; }
+.input-card-cvv { width: 60px; }
+@media (max-width: 600px) {
+  .modal-details { padding: 0.7rem 0.5rem; font-size: 0.95rem; }
+  .modal-payment-methods { flex-direction: column; gap: 0.5rem; }
+  .field-group { flex-direction: column; gap: 0.3rem; }
 }
