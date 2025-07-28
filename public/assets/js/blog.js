@@ -4,25 +4,25 @@
 const BLOG_POSTS = [
   {
     id: 1,
-    titulo: 'Voluntariado en Darién',
-    imagen: '../../public/assets/images/hero/voluntariado.jpg',
-    extracto: 'Una experiencia que cambió mi vida ayudando en comunidades rurales de Darién... ¡Lee la historia completa!',
-    contenido: 'Texto completo de la experiencia en Darién. Mucho aprendizaje, trabajo en equipo y gratitud. Participé en la construcción de una escuela y en talleres de salud para niños y adultos. Recomiendo a todos vivir una experiencia así.',
-    autor: 'Juan Pérez',
+    titulo: 'Volunteering in Darién',
+    imagen: '../../public/assets/images/hero/connection.png',
+    extracto: 'A life-changing experience helping rural communities in Darién... Read the full story!',
+    contenido: 'Full story of the experience in Darién. Lots of learning, teamwork, and gratitude. I participated in building a school and in health workshops for children and adults. I recommend everyone to live such an experience.',
+    autor: 'John Perez',
     fecha: '2025-05-10',
     destacado: true,
     video: '',
     comentarios: [
-      { autor: 'María', texto: '¡Inspirador! ¿Cómo puedo participar?', fecha: '2025-05-11', aprobado: true }
+      { autor: 'Maria', texto: 'Inspiring! How can I participate?', fecha: '2025-05-11', aprobado: true }
     ]
   },
   {
     id: 2,
-    titulo: 'Jornada de Salud en Chiriquí',
-    imagen: '../../public/assets/images/hero/salud.jpg',
-    extracto: 'Médicos y voluntarios llevaron atención a más de 200 personas en zonas rurales de Chiriquí.',
-    contenido: 'Crónica de la jornada de salud: médicos, enfermeros y voluntarios de AidSync brindaron consultas, medicamentos y charlas de prevención a familias de comunidades apartadas. ¡Gracias a todos los que apoyaron!',
-    autor: 'Ana Torres',
+    titulo: 'Health Day in Chiriquí',
+    imagen: '../../public/assets/images/hero/comedor.jpg',
+    extracto: 'Doctors and volunteers provided care to over 200 people in rural areas of Chiriquí.',
+    contenido: 'Chronicle of the health day: doctors, nurses, and AidSync volunteers provided consultations, medicines, and prevention talks to families in remote communities. Thanks to everyone who supported!',
+    autor: 'Anna Torres',
     fecha: '2025-04-28',
     destacado: true,
     video: 'https://www.youtube.com/embed/ScMzIvxBSi4',
@@ -30,11 +30,11 @@ const BLOG_POSTS = [
   },
   {
     id: 3,
-    titulo: 'Reforestación Urbana',
-    imagen: '../../public/assets/images/hero/ambiente.jpg',
-    extracto: 'Más de 500 árboles plantados en la ciudad gracias a voluntarios y empresas aliadas.',
-    contenido: 'Detalles de la campaña: se plantaron especies nativas en parques y avenidas principales. Participaron estudiantes, empresas y familias. ¡Juntos por un aire más limpio!',
-    autor: 'Carlos Ruiz',
+    titulo: 'Urban Reforestation',
+    imagen: '../../public/assets/images/hero/environment.png',
+    extracto: 'Over 500 trees planted in the city thanks to volunteers and partner companies.',
+    contenido: 'Campaign details: native species were planted in parks and main avenues. Students, companies, and families participated. Together for cleaner air!',
+    autor: 'Charles Ruiz',
     fecha: '2025-04-15',
     destacado: false,
     video: '',
@@ -42,11 +42,11 @@ const BLOG_POSTS = [
   },
   {
     id: 4,
-    titulo: 'Historias de Esperanza',
-    imagen: '../../public/assets/images/hero/bienestar.jpg',
-    extracto: 'Testimonios de personas beneficiadas por AidSync y sus programas sociales.',
-    contenido: 'Historias reales de impacto social: entrevistas a familias que recibieron apoyo en salud, educación y vivienda. AidSync sigue transformando vidas con tu ayuda.',
-    autor: 'Sofía Martínez',
+    titulo: 'Stories of Hope',
+    imagen: '../../public/assets/images/hero/education.webp',
+    extracto: 'Testimonies of people benefited by AidSync and its social programs.',
+    contenido: 'Real stories of social impact: interviews with families who received support in health, education, and housing. AidSync continues to transform lives with your help.',
+    autor: 'Sophie Martinez',
     fecha: '2025-03-30',
     destacado: false,
     video: '',
@@ -54,11 +54,11 @@ const BLOG_POSTS = [
   },
   {
     id: 5,
-    titulo: 'Taller de Emprendimiento Juvenil',
-    imagen: '../../public/assets/images/hero/voluntariado.jpg',
-    extracto: 'Jóvenes de distintas provincias participaron en un taller para crear sus propios negocios.',
-    contenido: 'El taller incluyó mentorías, charlas de empresarios y simulaciones de negocios. Varios proyectos recibieron capital semilla. ¡El futuro es de los jóvenes!',
-    autor: 'Laura Gómez',
+    titulo: 'Youth Entrepreneurship Workshop',
+    imagen: '../../public/assets/images/hero/connection.png',
+    extracto: 'Young people from different provinces participated in a workshop to create their own businesses.',
+    contenido: 'The workshop included mentoring, talks by entrepreneurs, and business simulations. Several projects received seed capital. The future belongs to the youth!',
+    autor: 'Laura Gomez',
     fecha: '2025-03-15',
     destacado: false,
     video: '',
@@ -66,11 +66,11 @@ const BLOG_POSTS = [
   },
   {
     id: 6,
-    titulo: 'Alianza con Fundación Sonrisas',
-    imagen: '../../public/assets/images/hero/salud.jpg',
-    extracto: 'Nueva alianza para llevar atención odontológica gratuita a comunidades vulnerables.',
-    contenido: 'AidSync y Fundación Sonrisas unen esfuerzos para realizar jornadas de salud bucal en escuelas rurales. Se entregaron kits de higiene y se atendieron a más de 300 niños.',
-    autor: 'Equipo AidSync',
+    titulo: 'Alliance with Smiles Foundation',
+    imagen: '../../public/assets/images/hero/comedor.jpg',
+    extracto: 'New partnership to provide free dental care to vulnerable communities.',
+    contenido: 'AidSync and Smiles Foundation join forces to carry out oral health days in rural schools. Hygiene kits were delivered and more than 300 children were treated.',
+    autor: 'AidSync Team',
     fecha: '2025-02-28',
     destacado: false,
     video: '',
@@ -100,7 +100,7 @@ function renderFeatured() {
       <div class="card-content">
         <div class="card-title">${post.titulo}</div>
         <div class="card-excerpt">${post.extracto}</div>
-        <button class="read-more">Leer más</button>
+        <button class="read-more">Read more</button>
       </div>
     </div>
   `).join('');
@@ -122,7 +122,7 @@ function renderList(page = 1) {
       <div class="card-content">
         <div class="card-title">${post.titulo}</div>
         <div class="card-excerpt">${post.extracto}</div>
-        <button class="read-more">Leer más</button>
+        <button class="read-more">Read more</button>
       </div>
     </div>
   `).join('');
@@ -187,14 +187,14 @@ function openModal(post) {
     <div class="modal-content-text">${post.contenido}</div>
     ${videoEmbed}
     <div class="comments-section">
-      <h3>Comentarios</h3>
+      <h3>Comments</h3>
       <div class="comments-list">
         ${post.comentarios.filter(c=>c.aprobado).map(c=>`<div class="comment"><div class="comment-meta">${c.autor} | ${new Date(c.fecha).toLocaleDateString()}</div>${c.texto}</div>`).join('')}
       </div>
       ${USER_LOGGED_IN ? `<form class="add-comment-form">
-        <textarea required placeholder="Escribe tu comentario..."></textarea>
-        <button type="submit">Enviar comentario</button>
-      </form>` : `<div class="comment-login-msg">Inicia sesión para comentar.</div>`}
+        <textarea required placeholder="Write your comment..."></textarea>
+        <button type="submit">Send comment</button>
+      </form>` : `<div class="comment-login-msg">Log in to comment.</div>`}
       <div class="comment-msg" style="color:#16a34a;margin-top:0.5rem;"></div>
     </div>
   `;
@@ -218,8 +218,8 @@ function setupCommentForm(post) {
   form.onsubmit = e => {
     e.preventDefault();
     const texto = form.querySelector('textarea').value;
-    PENDING_COMMENTS.push({postId: post.id, autor: 'Usuario', texto, fecha: new Date().toISOString(), aprobado: false});
-    msg.textContent = 'Tu comentario fue enviado para revisión.';
+    PENDING_COMMENTS.push({postId: post.id, autor: 'User', texto, fecha: new Date().toISOString(), aprobado: false});
+    msg.textContent = 'Your comment was sent for review.';
     form.reset();
   };
 }
@@ -230,18 +230,18 @@ function renderNewPostForm() {
   container.className = 'new-post-section';
   container.style.display = USER_LOGGED_IN ? 'block' : 'none';
   container.innerHTML = `
-    <h2>Enviar nueva publicación</h2>
+    <h2>Submit New Post</h2>
     <form id="new-post-form" class="new-post-form">
-      <input type="text" name="titulo" placeholder="Título" required maxlength="80">
-      <input type="text" name="autor" placeholder="Tu nombre o empresa" required maxlength="40">
-      <input type="url" name="imagen" placeholder="URL de imagen (opcional)">
-      <textarea name="extracto" placeholder="Extracto breve (máx 120 caracteres)" maxlength="120" required></textarea>
-      <textarea name="contenido" placeholder="Contenido completo" required></textarea>
-      <label><input type="checkbox" name="destacado"> Marcar como destacado</label>
-      <button type="submit">Enviar publicación</button>
+      <input type="text" name="titulo" placeholder="Title" required maxlength="80">
+      <input type="text" name="autor" placeholder="Your name or organization" required maxlength="40">
+      <input type="url" name="imagen" placeholder="Image URL (optional)">
+      <textarea name="extracto" placeholder="Short excerpt (max 120 characters)" maxlength="120" required></textarea>
+      <textarea name="contenido" placeholder="Full content" required></textarea>
+      <label><input type="checkbox" name="destacado"> Mark as featured</label>
+      <button type="submit">Send post</button>
       <div class="post-msg" style="color:#16a34a;margin-top:0.5rem;"></div>
     </form>
-    ${!USER_LOGGED_IN ? '<div class="comment-login-msg">Inicia sesión para enviar publicaciones.</div>' : ''}
+    ${!USER_LOGGED_IN ? '<div class="comment-login-msg">Log in to submit posts.</div>' : ''}
   `;
   document.querySelector('.blog-main').insertBefore(container, document.querySelector('.featured-section'));
   if(USER_LOGGED_IN) {
@@ -261,7 +261,7 @@ function renderNewPostForm() {
         comentarios: [],
         aprobado: false
       });
-      this.querySelector('.post-msg').textContent = 'Tu publicación fue enviada para revisión.';
+      this.querySelector('.post-msg').textContent = 'Your post was sent for review.';
       this.reset();
     };
   }
@@ -273,13 +273,13 @@ function renderModerationPanel() {
   const panel = document.createElement('section');
   panel.className = 'moderation-section';
   panel.innerHTML = `
-    <h2>Moderación (Equipo AidSync)</h2>
+    <h2>Moderation (AidSync Team)</h2>
     <div class="moderation-posts">
-      <h3>Publicaciones pendientes</h3>
+      <h3>Pending posts</h3>
       <div id="pending-posts"></div>
     </div>
     <div class="moderation-comments">
-      <h3>Comentarios pendientes</h3>
+      <h3>Pending comments</h3>
       <div id="pending-comments"></div>
     </div>
   `;
@@ -288,24 +288,24 @@ function renderModerationPanel() {
 }
 
 function updateModerationPanel() {
-  // Publicaciones
+  // Posts
   const postsDiv = document.getElementById('pending-posts');
   postsDiv.innerHTML = PENDING_POSTS.length ? PENDING_POSTS.map(post => {
     return `<div class="pending-item">
-      <b>${post.titulo}</b> por ${post.autor}<br />
-      <button onclick="approvePost(${post.id})">Aprobar</button>
-      <button onclick="rejectPost(${post.id})">Rechazar</button>
+      <b>${post.titulo}</b> by ${post.autor}<br />
+      <button onclick="approvePost(${post.id})">Approve</button>
+      <button onclick="rejectPost(${post.id})">Reject</button>
     </div>`;
-  }).join('') : '<em>No hay publicaciones pendientes.</em>';
-  // Comentarios
+  }).join('') : '<em>No pending posts.</em>';
+  // Comments
   const commDiv = document.getElementById('pending-comments');
   commDiv.innerHTML = PENDING_COMMENTS.length ? PENDING_COMMENTS.map((c,i) => {
     return `<div class="pending-item">
       <b>${c.autor}</b>: ${c.texto}<br />
-      <button onclick="approveComment(${i})">Aprobar</button>
-      <button onclick="rejectComment(${i})">Rechazar</button>
+      <button onclick="approveComment(${i})">Approve</button>
+      <button onclick="rejectComment(${i})">Reject</button>
     </div>`;
-  }).join('') : '<em>No hay comentarios pendientes.</em>';
+  }).join('') : '<em>No pending comments.</em>';
 }
 
 window.approvePost = function(id) {
