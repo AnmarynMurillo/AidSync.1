@@ -1,60 +1,81 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+// auth.js
+
+import { 
+  getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  
+  onAuthStateChanged, 
+  signOut 
+} from "firebase/auth";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 
-// ... (tu código de inicialización de Firebase)
-
-const auth = getAuth();
+// ————— Inicialización de Firebase Auth y Firestore —————
+const auth     = getAuth();
 const provider = new GoogleAuthProvider();
-const db = getFirestore(); // Obtén una referencia a Firestore
+const db       = getFirestore();
 
-async function signInWithGoogle() {
+// ————— Referencias al DOM (header) —————
+const loginContainer   = document.getElementById('login-container');
+const btnLogin         = document.getElementById('btn-login');
+const profileContainer = document.getElementById('profile-container');
+const profilePhoto     = document.getElementById('profile-photo');
+const profileName      = document.getElementById('profile-name');
+const btnLogout        = document.getElementById('btn-logout');
+
+// ————— Función de inicio de sesión con Google —————
+const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    // Esto te da un objeto con información del usuario que acaba de iniciar sesión.
-    const user = result.user;
+    const { user } = await signInWithPopup(auth, provider);
+    console.log("✅ Usuario autenticado:", user);
 
-    console.log("Usuario autenticado:", user);
-
-    // Aquí es donde puedes manejar la integración con Firestore.
-    // Usamos el user.uid como ID del documento en Firestore
-    // para almacenar información adicional del usuario.
-    const userDocRef = doc(db, "users", user.uid);
-
-    // Podemos verificar si el documento del usuario ya existe (opcional, si quieres
-    // hacer algo específico solo la primera vez que inicia sesión).
-    // Sin embargo, setDoc con merge: true es seguro y actualizará el documento
-    // si existe, o lo creará si no.
-
-    // Puedes guardar información básica del usuario, como su nombre y foto.
-    // Esto se ejecuta cada vez que inician sesión, pero setDoc es eficiente.
-    await setDoc(userDocRef, {
-      displayName: user.displayName,
-      email: user.email, // Ten en cuenta las reglas de seguridad de Firestore para emails
-      photoURL: user.photoURL,
-      // Puedes añadir otros campos aquí si los necesitas,
-      // como un timestamp de la última conexión
+    // Guardar/actualizar datos del usuario en Firestore
+    const userRef = doc(db, "users", user.uid);
+    await setDoc(userRef, {
+      displayName:    user.displayName,
+      email:          user.email,
+      photoURL:       user.photoURL,
       lastSignInTime: new Date(),
-    }, { merge: true }); // merge: true fusiona los datos si el documento ya existe
+    }, { merge: true });
+    console.log("✅ Datos guardados en Firestore para UID:", user.uid);
 
-    console.log("Información del usuario guardada/actualizada en Firestore con UID:", user.uid);
-
-    // Redirige al usuario a la parte principal de tu app, etc.
+    // (Opcional) Redirigir tras login
+    // window.location.href = '/dashboard.html';
 
   } catch (error) {
-    // Manejo de errores, por ejemplo, si el usuario cierra el popup
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.customData?.email; // El email de la cuenta usada, si está disponible
-    const credential = GoogleAuthProvider.credentialFromError(error); // Credencial de auth
-
-    console.error("Error durante la autenticación con Google:", errorMessage, errorCode);
-
-    // Aquí puedes mostrar un mensaje al usuario
+    // Manejo de errores de autenticación
+    console.error("❌ Error en login:", error.code, error.message);
+    // Aquí podrías mostrar una alerta al usuario, ej:
+    // alert("Falló el inicio de sesión. Intenta de nuevo.");
   }
-}
+};
 
-// Llama a esta función, por ejemplo, desde un botón "Iniciar sesión con Google"
-// const googleSignInButton = document.getElementById('google-sign-in-button');
-// if (googleSignInButton) {
-//   googleSignInButton.addEventListener('click', signInWithGoogle);
-// }
+// ————— Observador de estado de autenticación —————
+onAuthStateChanged(auth, user => {
+  if (user) {
+    // Si hay usuario → ocultar botón login y mostrar perfil
+    loginContainer.style.display   = 'none';
+    profileContainer.style.display = 'flex';
+    profileName.textContent        = user.displayName || 'Usuario';
+    profilePhoto.src               = user.photoURL || profilePhoto.src;
+  } else {
+    // Si NO hay usuario → mostrar botón login y ocultar perfil
+    profileContainer.style.display = 'none';
+    loginContainer.style.display   = 'block';
+  }
+});
+
+// ————— Evento: click en “Iniciar sesión” —————
+btnLogin?.addEventListener('click', signInWithGoogle);
+
+// ————— Evento: click en “Cerrar sesión” —————
+btnLogout?.addEventListener('click', async () => {
+  try {
+    await signOut(auth);
+    console.log("🔒 Sesión cerrada correctamente");
+    // Redirigir al index principal
+    window.location.href = '/index.html';
+  } catch (error) {
+    console.error("❌ Error al cerrar sesión:", error);
+  }
+});

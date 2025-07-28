@@ -1,115 +1,108 @@
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  console.log("🔵 Formulario enviado");
+// login.js - Procedimiento híbrido: Python backend primero, luego Firebase
 
-  const email = document.getElementById('login-user').value;
-  const password = document.getElementById('login-pass').value;
-  const status = document.getElementById('login-status');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.x/firebase-auth.js";
 
-  console.log("📧 Email:", email);
-  console.log("🔐 Password:", password);
+// ================================
+// 1. INICIALIZAR FIREBASE
+// ================================
+const firebaseConfig = {
+  apiKey: "AIzaSyAJ395j9EL5Nv81Q70Csc4zRKNp5e1Xrjo",
+  authDomain: "expo-project-1040e.firebaseapp.com",
+  databaseURL: "https://expo-project-1040e-default-rtdb.firebaseio.com",
+  projectId: "expo-project-1040e",
+  storageBucket: "expo-project-1040e.firebasestorage.app",
+  messagingSenderId: "813329495011",
+  appId: "1:813329495011:web:931d42531c471fe3e2e6d6",
+  measurementId: "G-QY0VQSB12F"
+};
+initializeApp(firebaseConfig);
+const auth = getAuth();
 
-  // Validar campos
-  if (!email || !password) {
-    status.textContent = 'Por favor, complete todos los campos';
-    console.log("❌ Faltan campos");
-    return;
-  }
-
-  status.textContent = 'Iniciando sesión...';
-  console.log("⏳ Intentando login con backend...");
-
-  // Intenta primero con backend Flask
+// ================================
+// 2. INTENTO DE LOGIN CON FLASK
+// ================================
+async function tryPythonLogin(email, password, timeout = 2000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 segundos
-
     const res = await fetch('http://localhost:5000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ email, password }),
+      credentials: 'include',
       signal: controller.signal
     });
-
-    clearTimeout(timeoutId);
-    const text = await res.text();
-    console.log("📨 Respuesta cruda del backend:", text);
-
-    try {
-      const data = JSON.parse(text);
-      console.log("🧾 Respuesta JSON parseada:", data);
-
-      if (res.ok && data.success) {
-        console.log("✅ Login exitoso vía backend:", data.user);
-        localStorage.setItem('user', JSON.stringify({email: data.user}));
-        window.location.href = '/index.html';
-      } else {
-        console.log("❌ Login fallido (backend):", data.message);
-        status.textContent = data.message || 'Error al iniciar sesión';
-      }
-    } catch (parseError) {
-      console.error("❗ Error al parsear respuesta del backend:", parseError);
-      status.textContent = 'Respuesta inválida del servidor: ' + text;
-    }
-
+    clearTimeout(timer);
+    const data = await res.json();
+    return { success: data.success, message: data.message, user: data.user };
   } catch (err) {
-    console.warn("⚠️ Backend no disponible. Error:", err);
-    status.textContent = 'Servidor backend no disponible, intentando login directo con Firebase...';
+    clearTimeout(timer);
+    console.warn('⚠️ Python login failed or timed out:', err);
+    return { success: false, message: err.message };
+  }
+}
 
-    // Si el backend no responde, usa el SDK de Firebase
-    try {
-      await ensureFirebaseInit();
-      console.log("📲 Firebase SDK cargado");
+// ================================
+// 3. LOGIN VÍA FIREBASE (FALLBACK)
+// ================================
+async function tryFirebaseLogin(email, password) {
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    console.log('✅ Firebase login success:', userCred.user.email);
+    return { success: true, user: userCred.user };
+  } catch (err) {
+    console.error('❌ Firebase login error:', err.code);
+    return { success: false, message: err.code };
+  }
+}
 
-      const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+// ================================
+// 4. MANEJADOR DEL FORMULARIO
+// ================================
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const status = document.getElementById('login-status');
+  const email = document.getElementById('login-user').value.trim();
+  const password = document.getElementById('login-pass').value;
 
-      console.log("✅ Login exitoso vía Firebase:", user.email);
+  if (!email || !password) {
+    status.textContent = 'Por favor, complete todos los campos';
+    return;
+  }
+  status.textContent = 'Iniciando sesión...';
 
-      const remember = document.getElementById('login-remember').checked;
-      if (remember) {
-        localStorage.setItem('user', JSON.stringify({email: user.email}));
-        sessionStorage.removeItem('user');
-      } else {
-        sessionStorage.setItem('user', JSON.stringify({email: user.email}));
-        localStorage.removeItem('user');
-      }
+  // 1) Intento con Python backend
+  console.log('▶️ Intentando login backend...');
+  const pythonRes = await tryPythonLogin(email, password);
+  if (pythonRes.success) {
+    console.log('✅ Backend login OK', pythonRes.user);
+    localStorage.setItem('user', JSON.stringify(pythonRes.user));
+    window.location.href = '/index.html';
+    return;
+  }
 
-      window.location.href = '/index.html';
-
-    } catch (firebaseError) {
-      console.error("❌ Login fallido vía Firebase:", firebaseError);
-
-      let msg = '';
-      switch (firebaseError.code) {
-        case 'auth/user-not-found':
-          msg = 'No existe ninguna cuenta registrada con ese correo.';
-          break;
-        case 'auth/wrong-password':
-          msg = 'La contraseña es incorrecta.';
-          break;
-        case 'auth/invalid-email':
-          msg = 'El formato del correo es inválido.';
-          break;
-        case 'auth/user-disabled':
-          msg = 'Esta cuenta ha sido deshabilitada.';
-          break;
-        case 'auth/too-many-requests':
-          msg = 'Demasiados intentos fallidos. Intenta de nuevo más tarde.';
-          break;
-        case 'auth/network-request-failed':
-          msg = 'Error de red. Revisa tu conexión a internet.';
-          break;
-        default:
-          msg = 'Error al iniciar sesión: ' + (firebaseError.message || firebaseError.code);
-      }
-      status.textContent = msg;
-    }
+  // 2) Fallback a Firebase
+  status.textContent = 'Backend no disponible, intentando Firebase...';
+  console.log('▶️ Intentando login Firebase...');
+  const firebaseRes = await tryFirebaseLogin(email, password);
+  if (firebaseRes.success) {
+    const remember = document.getElementById('login-remember').checked;
+    const storage = remember ? localStorage : sessionStorage;
+    storage.setItem('user', JSON.stringify({ email: firebaseRes.user.email }));
+    window.location.href = '/index.html';
+  } else {
+    status.textContent = {
+      'auth/user-not-found': 'Correo no registrado.',
+      'auth/wrong-password': 'Contraseña incorrecta.',
+      'auth/invalid-email': 'Formato de correo inválido.'
+    }[firebaseRes.message] || 'Error al iniciar sesión';
   }
 });
 
-// Función para mostrar el popup de confirmación de logout
+// ================================
+// 5. POPUP DE LOGOUT (sin cambio)
+// ================================
 function showLogoutPopup() {
   const popup = document.createElement('div');
   popup.className = 'logout-popup';

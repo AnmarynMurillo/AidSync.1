@@ -16,23 +16,39 @@
         <img src="/public/assets/images/logos/Logo_logo.png" alt="AidSync Logo" class="header-logo">
       </a>
     </div>
+
     <nav class="desktop-nav" aria-label="Menú principal desktop">
       <a href="/index.html">Home</a>
       <a href="/public/assets/pages/volunteer.html">Volunteer</a>
       <a href="/public/assets/pages/donate.html">Donate</a>
       <a href="/public/assets/pages/about.html">About us</a>
-      <a href="/public/assets/pages/register.html" class="btn register">Register</a>
-      <a href="/public/assets/pages/login.html" class="btn login">Login</a>
+
+      <!-- CONTENEDOR LOGIN (visible cuando no hay usuario) -->
+      <a href="#" id="login-btn" class="btn login">Login</a>
+
+      <!-- CONTENEDOR REGISTER (visible cuando no hay usuario) -->
+      <a href="/public/assets/pages/register.html" id="register-btn" class="btn register">Register</a>
+
+      <!-- CONTENEDOR PERFIL (visible cuando hay usuario) -->
+      <div id="profile-container" style="display: none; align-items: center;">
+        <a href="/src/profile/user-profile.html" id="profile-link" class="profile-icon-link" aria-label="Perfil">
+          <img id="profile-photo" src="/public/assets/images/photos/idioma.png"
+               alt="Foto de perfil" class="profile-icon">
+          <span id="profile-name" class="user-name"></span>
+        </a>
+        <button id="logout-btn" class="btn logout" style="margin-left: 10px;">
+          Cerrar sesión
+        </button>
+      </div>
     </nav>
+
     <div class="header-actions">
-      <a href="/src/profile/user-profile.html" id="profile-link" style="display:none;" class="profile-icon-link" aria-label="Profile">
-        <img src="/public/assets/images/photos/idioma.png" alt="Profile" class="profile-icon">
-      </a>
       <button class="lang-switch" id="lang-switch" aria-label="Cambiar idioma">
-        <img src="/public/assets/images/icons/idioma.png" alt="Language" class="header-icon" />
+        <img src="/public/assets/images/icons/idioma.png" alt="Idioma" class="header-icon" />
       </button>
       <button id="theme-switch" aria-label="Cambiar tema" class="theme-switch-btn">
-        <img id="theme-icon" src="/public/assets/images/icons/Tema Claro Oscuro.png" alt="Theme" class="header-icon" />
+        <img id="theme-icon" src="/public/assets/images/icons/Tema Claro Oscuro.png"
+             alt="Tema" class="header-icon" />
       </button>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú">
         <span class="bar"></span>
@@ -40,20 +56,17 @@
         <span class="bar"></span>
       </button>
     </div>
+
     <nav class="main-menu" id="main-menu" aria-label="Menú hamburguesa">
-      <a href="/index.html">Home</a>
-      <a href="/public/assets/pages/volunteer.html">Volunteer</a>
-      <a href="/public/assets/pages/donate.html">Donate</a>
-      <a href="/public/assets/pages/about.html">About us</a>
-      <a href="/public/assets/pages/contact.html">Contact</a>
-      <a href="/public/assets/pages/blog.html">Blog</a>
-      <a href="/public/assets/pages/calendar.html">Calendar</a>
-      <a href="/public/assets/pages/map.html">Map</a>
-      <a href="/public/assets/pages/register.html" class="btn register">Register</a>
-      <a href="/public/assets/pages/login.html" class="btn login">Login</a>
+      <!-- ... tus enlaces para móvil ... -->
     </nav>
   </header>
   <div class="menu-backdrop hide" id="menu-backdrop"></div>
+
+  <!-- Firebase + tu script de header -->
+  <script src="https://www.gstatic.com/firebasejs/9.x/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.x/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.x/firebase-firestore.js"></script>
   <script src="/public/assets/components/header.js"></script>
 </body>
 </html>
