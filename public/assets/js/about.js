@@ -71,10 +71,9 @@ const TEAM = [
 ];
 
 const CAROUSEL_IMAGES = [
-  '../../public/assets/images/team/momento1.jpg',
-  '../../public/assets/images/team/momento2.jpg',
-  '../../public/assets/images/team/momento3.jpg',
-  '../../public/assets/images/team/momento4.jpg'
+  '../../public/assets/images/AidSync Moments/processed-B1604F83-B33C-4EC1-A714-614C5025852B (1).jpeg',
+  '../../public/assets/images/AidSync Moments/processed-B1604F83-B33C-4EC1-A714-614C5025852B.jpeg',
+  '../../public/assets/images/AidSync Moments/processed-C7104030-9932-4855-ACD0-B7DCA77DBC35.jpeg'
 ];
 
 // Renderiza las tarjetas del equipo
