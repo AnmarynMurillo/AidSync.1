@@ -9,6 +9,186 @@ if not firebase_admin._apps:
 
 db = firestore.client()
 
+# ------------------- SERVICIO DE LUGARES DE VOLUNTARIADO -------------------
+
+def create_volunteer_location(request):
+    """
+    Crea un lugar donde se pueden realizar actividades de voluntariado:
+    1. Verifica el ID Token enviado en el header Authorization.
+    2. Si es válido, crea un lugar en la colección 'volunteer_locations'.
+    """
+    try:
+        data = request.json
+        # Obtener el token del header
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'error': 'No token provided'}), 401
+        
+        token = auth_header.split('Bearer ')[1]
+        decoded_token = auth.verify_id_token(token)
+        
+        # Crear documento en Firestore
+        location_ref = db.collection('volunteer_locations').document()
+        location_ref.set({
+            'name': data['name'],  # Nombre del lugar
+            'address': data['address'],  # Dirección completa
+            'district': data.get('district', ''),  # Distrito (Panamá, San Miguelito, etc.)
+            'province': data.get('province', 'Panamá'),  # Provincia
+            'coordinates': {
+                'latitude': data.get('latitude', 0.0),
+                'longitude': data.get('longitude', 0.0)
+            },
+            'description': data.get('description', ''),  # Descripción del lugar
+            'type': data.get('type', 'General'),  # hospital, escuela, parque, comunidad, etc.
+            'contact_person': data.get('contact_person', ''),  # Persona de contacto
+            'contact_phone': data.get('contact_phone', ''),
+            'contact_email': data.get('contact_email', ''),
+            'accessibility': data.get('accessibility', ''),  # Info sobre accesibilidad
+            'facilities': data.get('facilities', []),  # baños, parking, agua, etc.
+            'transportation': data.get('transportation', ''),  # Cómo llegar
+            'status': 'active',  # active, inactive
+            'created_by': decoded_token['uid'],
+            'created_at': firestore.SERVER_TIMESTAMP
+        })
+        
+        return jsonify({
+            'message': 'Lugar de voluntariado creado exitosamente', 
+            'id': location_ref.id
+        }), 201
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+def get_volunteer_locations(request):
+    """
+    Obtiene todos los lugares de voluntariado activos:
+    1. Retorna todos los lugares activos ordenados por nombre.
+    """
+    try:
+        # Obtener todos los lugares activos
+        locations = db.collection('volunteer_locations')\
+                     .where('status', '==', 'active')\
+                     .order_by('name')\
+                     .stream()
+        
+        locations_list = []
+        for loc in locations:
+            loc_data = loc.to_dict()
+            loc_data['id'] = loc.id
+            # Convertir timestamp a string si existe
+            if 'created_at' in loc_data and loc_data['created_at']:
+                loc_data['created_at'] = loc_data['created_at'].isoformat()
+            locations_list.append(loc_data)
+        
+        return jsonify(locations_list), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+def get_locations_by_district(request, district):
+    """
+    Obtiene lugares de voluntariado filtrados por distrito:
+    1. Retorna lugares del distrito especificado.
+    """
+    try:
+        locations = db.collection('volunteer_locations')\
+                     .where('status', '==', 'active')\
+                     .where('district', '==', district)\
+                     .order_by('name')\
+                     .stream()
+        
+        locations_list = []
+        for loc in locations:
+            loc_data = loc.to_dict()
+            loc_data['id'] = loc.id
+            if 'created_at' in loc_data and loc_data['created_at']:
+                loc_data['created_at'] = loc_data['created_at'].isoformat()
+            locations_list.append(loc_data)
+        
+        return jsonify(locations_list), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+def get_locations_by_type(request, location_type):
+    """
+    Obtiene lugares de voluntariado filtrados por tipo:
+    1. Retorna lugares del tipo especificado (hospital, escuela, etc.).
+    """
+    try:
+        locations = db.collection('volunteer_locations')\
+                     .where('status', '==', 'active')\
+                     .where('type', '==', location_type)\
+                     .order_by('name')\
+                     .stream()
+        
+        locations_list = []
+        for loc in locations:
+            loc_data = loc.to_dict()
+            loc_data['id'] = loc.id
+            if 'created_at' in loc_data and loc_data['created_at']:
+                loc_data['created_at'] = loc_data['created_at'].isoformat()
+            locations_list.append(loc_data)
+        
+        return jsonify(locations_list), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
+def update_volunteer_location(request, location_id):
+    """
+    Actualiza un lugar de voluntariado:
+    1. Verifica que el usuario sea quien creó el lugar.
+    2. Actualiza los campos proporcionados.
+    """
+    try:
+        data = request.json
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'error': 'No token provided'}), 401
+        
+        token = auth_header.split('Bearer ')[1]
+        decoded_token = auth.verify_id_token(token)
+        user_uid = decoded_token['uid']
+        
+        # Verificar que el lugar existe y fue creado por el usuario
+        location_ref = db.collection('volunteer_locations').document(location_id)
+        location = location_ref.get()
+        
+        if not location.exists:
+            return jsonify({'error': 'Lugar no encontrado'}), 404
+        
+        location_data = location.to_dict()
+        if location_data.get('created_by') != user_uid:
+            return jsonify({'error': 'No tienes permisos para actualizar este lugar'}), 403
+        
+        # Actualizar campos
+        update_data = {}
+        allowed_fields = ['name', 'address', 'district', 'province', 'description', 
+                         'type', 'contact_person', 'contact_phone', 'contact_email',
+                         'accessibility', 'facilities', 'transportation', 'status']
+        
+        for field in allowed_fields:
+            if field in data:
+                update_data[field] = data[field]
+        
+        if 'latitude' in data or 'longitude' in data:
+            coordinates = location_data.get('coordinates', {})
+            if 'latitude' in data:
+                coordinates['latitude'] = data['latitude']
+            if 'longitude' in data:
+                coordinates['longitude'] = data['longitude']
+            update_data['coordinates'] = coordinates
+        
+        if update_data:
+            update_data['updated_at'] = firestore.SERVER_TIMESTAMP
+            location_ref.update(update_data)
+        
+        return jsonify({'message': 'Lugar actualizado exitosamente'}), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+
 # ------------------- SERVICIO DE OPORTUNIDADES DE VOLUNTARIADO -------------------
 
 def create_volunteer_opportunity(request):
@@ -33,7 +213,8 @@ def create_volunteer_opportunity(request):
             'title': data['title'],
             'description': data['description'],
             'organization': data['organization'],
-            'location': data['location'],
+            'location_id': data.get('location_id', ''),  # ID del lugar de la colección locations
+            'location_name': data.get('location_name', ''),  # Nombre del lugar (para referencia rápida)
             'date': data['date'],
             'duration': data['duration'],  # en horas
             'max_volunteers': data.get('max_volunteers', 10),  # máximo de voluntarios
@@ -194,6 +375,3 @@ def get_user_created_opportunities(request):
         
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-    
-    
-    # TODO ESTO NO FUNCIONA, SOLAMENTE DE EJEMPLO
