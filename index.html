@@ -120,19 +120,15 @@
 
     <!-- Footer -->
     <div id="footer-container"></div>
-
     <!-- Scripts -->
+<script>  fetch('public/assets/components/header.html').then(r=>r.text()).then(h=>document.getElementById('header-container').innerHTML=h);</script>
+<script src="public/assets/components/loadHeader.js"></script>
+<script>
+    loadHeader();
+  </script>
     <script src="public/assets/js/home.js"></script>
     <script src="src/firebase/firebaseConfig.js"></script>
-    <script>
-        // Load external header and footer
-        fetch('public/assets/components/header.html')
-            .then(r => r.text())
-            .then(html => document.getElementById('header-container').innerHTML = html);
-        fetch('public/assets/components/footer.html')
-            .then(r => r.text())
-            .then(html => document.getElementById('footer-container').innerHTML = html);
-    </script>
+   
     <script>
         // Carrusel de organizaciones con flechas
         const orgCarousel = document.getElementById('org-carousel');

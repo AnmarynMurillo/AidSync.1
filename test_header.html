@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Header - AidSync</title>
+    <link rel="stylesheet" href="/public/assets/css/global.css">
+    <link rel="stylesheet" href="/public/assets/components/components.css">
+    <link rel="icon" href="/public/assets/images/logos/logito.ico" type="image/x-icon">
+    <style>
+      :root[data-theme='dark'] {
+        --background: #181818;
+        --text: #f0f0f0;
+        --header-bg: #232323;
+        --header-text: #fff;
+      }
+      :root[data-theme='light'] {
+        --background: #fff;
+        --text: #181818;
+        --header-bg: #fff;
+        --header-text: #232323;
+      }
+      body {
+        background: var(--background);
+        color: var(--text);
+      }
+      .main-header, .sticky-header, .aid-header {
+        background: var(--header-bg);
+        color: var(--header-text);
+      }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Contenido de prueba -->
+    <main style="padding: 2rem; margin-top: 100px;">
+        <h1>Página de Prueba del Header</h1>
+        <h1>owo</h1>
+        <p>Esta página sirve para probar que el header funcione correctamente.</p>
+        
+        <h2>Funcionalidades a probar:</h2>
+        <ul>
+            <li>✅ Menú hamburguesa en móviles</li>
+            <li>✅ Navegación desktop</li>
+            <li>✅ Botón de idioma</li>
+            <li>✅ Botón de tema</li>
+            <li>✅ Header sticky al hacer scroll</li>
+            <li>✅ Manejo de sesión de usuario</li>
+            <li>✅ Popup de logout</li>
+        </ul>
+
+        <div style="height: 2000px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); margin-top: 2rem;">
+            <p style="padding: 2rem;">Contenido para hacer scroll y probar el header sticky...</p>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/public/assets/components/loadHeader.js"></script>
+    <script>
+        loadHeader();
+        // Simular un usuario logueado para probar la funcionalidad
+        setTimeout(() => {
+            const testUser = {
+                email: 'usuario@test.com',
+                name: 'Usuario Test'
+            };
+            localStorage.setItem('user', JSON.stringify(testUser));
+            if (window.location.search.includes('test-user')) {
+                window.location.reload();
+            }
+        }, 1000);
+    </script>
+</body>
+</html> 
