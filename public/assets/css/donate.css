@@ -125,9 +125,9 @@
 .modal-content {
   background: var(--color-card);
   border-radius: 1.2rem;
-  max-width: 600px;
-  width: 95vw;
-  padding: 2rem;
+  max-width: 900px;
+  width: 90vw;
+  padding: 3rem;
   position: relative;
   box-shadow: 0 8px 32px #0003;
   animation: modalIn 0.2s;
