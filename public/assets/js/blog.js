@@ -5,7 +5,7 @@ const BLOG_POSTS = [
   {
     id: 1,
     titulo: 'Volunteering in Darién',
-    imagen: '../../public/assets/images/hero/connection.png',
+    imagen: '/public/assets/images/hero/connection.png',
     extracto: 'A life-changing experience helping rural communities in Darién... Read the full story!',
     contenido: 'Full story of the experience in Darién. Lots of learning, teamwork, and gratitude. I participated in building a school and in health workshops for children and adults. I recommend everyone to live such an experience.',
     autor: 'John Perez',
@@ -19,7 +19,7 @@ const BLOG_POSTS = [
   {
     id: 2,
     titulo: 'Health Day in Chiriquí',
-    imagen: '../../public/assets/images/hero/comedor.jpg',
+    imagen: '/public/assets/images/hero/comedor.jpg',
     extracto: 'Doctors and volunteers provided care to over 200 people in rural areas of Chiriquí.',
     contenido: 'Chronicle of the health day: doctors, nurses, and AidSync volunteers provided consultations, medicines, and prevention talks to families in remote communities. Thanks to everyone who supported!',
     autor: 'Anna Torres',
@@ -31,7 +31,7 @@ const BLOG_POSTS = [
   {
     id: 3,
     titulo: 'Urban Reforestation',
-    imagen: '../../public/assets/images/hero/environment.png',
+    imagen: '/public/assets/images/hero/environment.png',
     extracto: 'Over 500 trees planted in the city thanks to volunteers and partner companies.',
     contenido: 'Campaign details: native species were planted in parks and main avenues. Students, companies, and families participated. Together for cleaner air!',
     autor: 'Charles Ruiz',
@@ -43,7 +43,7 @@ const BLOG_POSTS = [
   {
     id: 4,
     titulo: 'Stories of Hope',
-    imagen: '../../public/assets/images/hero/education.webp',
+    imagen: '/public/assets/images/hero/education.webp',
     extracto: 'Testimonies of people benefited by AidSync and its social programs.',
     contenido: 'Real stories of social impact: interviews with families who received support in health, education, and housing. AidSync continues to transform lives with your help.',
     autor: 'Sophie Martinez',
@@ -55,7 +55,7 @@ const BLOG_POSTS = [
   {
     id: 5,
     titulo: 'Youth Entrepreneurship Workshop',
-    imagen: '../../public/assets/images/hero/connection.png',
+    imagen: '/public/assets/images/hero/connection.png',
     extracto: 'Young people from different provinces participated in a workshop to create their own businesses.',
     contenido: 'The workshop included mentoring, talks by entrepreneurs, and business simulations. Several projects received seed capital. The future belongs to the youth!',
     autor: 'Laura Gomez',
@@ -67,7 +67,7 @@ const BLOG_POSTS = [
   {
     id: 6,
     titulo: 'Alliance with Smiles Foundation',
-    imagen: '../../public/assets/images/hero/comedor.jpg',
+    imagen: '/public/assets/images/hero/comedor.jpg',
     extracto: 'New partnership to provide free dental care to vulnerable communities.',
     contenido: 'AidSync and Smiles Foundation join forces to carry out oral health days in rural schools. Hygiene kits were delivered and more than 300 children were treated.',
     autor: 'AidSync Team',
