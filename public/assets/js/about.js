@@ -66,10 +66,9 @@ const TEAM = [
 
 // Carrusel con rutas corregidas
 const CAROUSEL_IMAGES = [
-  '../images/team/momento1.jpg',
-  '../images/team/momento2.jpg',
-  '../images/team/momento3.jpg',
-  '../images/team/momento4.jpg'
+  '../images/AidSync Moments/momento 1.jpeg',
+  '../images/AidSync Moments/momento 2.jpeg',
+  '../images/AidSync Moments/momento 3.jpeg'
 ];
 
 // Función para renderizar el equipo con manejo de errores

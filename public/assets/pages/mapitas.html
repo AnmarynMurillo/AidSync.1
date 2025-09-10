@@ -21,13 +21,15 @@
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  const marker = L.marker([0, 0]).addTo(map);
+  const marker1 = L.marker([0, 0]).addTo(map);
+  const marker2 = L.marker([9.080281245793506, -79.49860027398977]).addTo(map);
 
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(function(position) {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
-      marker.setLatLng([lat, lng]);
+      marker1.setLatLng([lat, lng]);
+      marker2.setLatLng([9.080281245793506, -79.49860027398977]);
       map.setView([lat, lng], 15);
     }, function() {
       alert('No se pudo obtener tu ubicación');

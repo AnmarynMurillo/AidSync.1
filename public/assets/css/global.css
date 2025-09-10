@@ -1108,3 +1108,24 @@ body {
   font-size: 1.08rem;
   font-weight: 500;
 }
+.footer-btn {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  margin: 0 0.2em;
+  background: var(--color-primary, #2563eb);
+  color: #fff !important;
+  border: none;
+  border-radius: 1.2em;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #003d6611;
+  cursor: pointer;
+}
+.footer-btn:hover, .footer-btn:focus {
+  background: var(--color-accent, #16a34a);
+  color: #fff !important;
+  text-decoration: none;
+  outline: none;
+}

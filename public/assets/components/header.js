@@ -62,6 +62,7 @@ window.addEventListener('resize', function() {
     toggleMenu(false);
   }
 });
+
 // Header sticky con transición de color al hacer scroll
 window.addEventListener('scroll', function() {
   if (header) {
@@ -76,23 +77,24 @@ document.addEventListener('DOMContentLoaded', function() {
   const profileLink = document.getElementById('profile-link');
   const loginBtn = document.getElementById('login-btn');
   const registerBtn = document.getElementById('register-btn');
-  const langBtn = document.getElementById('lang-btn');
+  const langSwitch = document.getElementById('lang-switch');
   let lang = localStorage.getItem('lang') || 'en';
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   // Actualizar el header según el estado de sesión
-  if (user) {
+  if (user && Object.keys(user).length > 0) {
     // Usuario logueado
     if (profileLink) {
       profileLink.style.display = 'inline-flex';
       // Mostrar email del usuario
       profileLink.innerHTML = `
-        <span class="user-name">${user.email || user.name}</span>
-        <img src="/public/assets/images/icons/user.svg" alt="Profile" class="profile-icon">
+        <span class="user-name">${user.email || user.name || 'Usuario'}</span>
+        <img src="/public/assets/images/photos/idioma.png" alt="Profile" class="profile-icon">
       `;
     }
     if (loginBtn) loginBtn.style.display = 'none';
     if (registerBtn) registerBtn.style.display = 'none';
+    
     // Crear botón de logout si no existe
     if (!document.getElementById('logout-btn')) {
       const logoutBtn = document.createElement('a');
@@ -106,11 +108,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Eliminar usuario del localStorage
         localStorage.removeItem('user');
         // Opcional: llamar al backend para cerrar sesión
-        fetch('http://localhost:5000/logout', { method: 'POST', credentials: 'include' });
+        fetch('http://localhost:5000/logout', { method: 'POST', credentials: 'include' }).catch(err => {
+          console.log('Error al cerrar sesión en backend:', err);
+        });
         // Recargar la página para actualizar el header
         window.location.reload();
       };
-      document.querySelector('.header-right').appendChild(logoutBtn);
+      const headerActions = document.querySelector('.header-actions');
+      if (headerActions) headerActions.appendChild(logoutBtn);
     }
   } else {
     // Usuario no logueado
@@ -138,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
       home: 'Inicio', volunteer: 'Voluntariado', donate: 'Donaciones', about: 'Sobre nosotros', contact: 'Contacto', blog: 'Blog', calendar: 'Calendario', map: 'Mapa', login: 'Iniciar sesión', register: 'Registrarse'
     }
   };
+  
   function translateHeader(lang) {
     const t = headerTranslations[lang] || headerTranslations.en;
     const mainMenu = document.querySelector('.main-menu');
@@ -154,19 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
         links[7].textContent = t.map;
       }
     }
-    const dropdown = document.getElementById('dropdown-menu');
-    if (dropdown) {
-      const dlinks = dropdown.querySelectorAll('a');
-      if (dlinks.length >= 7) {
-        dlinks[0].textContent = t.volunteer;
-        dlinks[1].textContent = t.donate;
-        dlinks[2].textContent = t.about;
-        dlinks[3].textContent = t.contact;
-        dlinks[4].textContent = t.blog;
-        dlinks[5].textContent = t.calendar;
-        dlinks[6].textContent = t.map;
-      }
-    }
+    
+    // Traducir botones de login y register
     if (loginBtn) loginBtn.textContent = t.login;
     if (registerBtn) registerBtn.textContent = t.register;
   }
@@ -175,12 +170,46 @@ document.addEventListener('DOMContentLoaded', function() {
   function showLogoutPopup() {
     const popup = document.createElement('div');
     popup.className = 'logout-popup';
+    popup.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    `;
     popup.innerHTML = `
-      <div class="popup-content">
+      <div class="popup-content" style="
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+      ">
         <h3>¿Estás seguro de querer cerrar sesión?</h3>
-        <div class="popup-buttons">
-          <button id="confirm-logout">Sí, cerrar sesión</button>
-          <button id="cancel-logout">Volver al inicio</button>
+        <div class="popup-buttons" style="margin-top: 1rem;">
+          <button id="confirm-logout" style="
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+          ">Sí, cerrar sesión</button>
+          <button id="cancel-logout" style="
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+          ">Cancelar</button>
         </div>
       </div>
     `;
@@ -202,6 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       } catch (err) {
         console.error('Error al cerrar sesión:', err);
+        // Aún así eliminar del localStorage
+        localStorage.removeItem('user');
+        window.location.href = '/index.html';
       } finally {
         popup.remove();
       }
@@ -215,26 +247,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // --- Idioma por defecto ---
   setLang(lang);
   translateHeader(lang);
-  if (langBtn) {
-    langBtn.onclick = () => {
+  
+  if (langSwitch) {
+    langSwitch.onclick = () => {
       lang = lang === 'es' ? 'en' : 'es';
       setLang(lang);
       translateHeader(lang);
       // Cambia bandera
-      const img = langBtn.querySelector('img');
+      const img = langSwitch.querySelector('img');
       if (img) {
-        img.src = lang === 'es' ? '/public/assets/images/icons/lang.svg' : '/public/assets/images/icons/lang-en.svg';
+        img.src = lang === 'es' ? '/public/assets/images/photos/idioma.png' : '/public/assets/images/photos/idioma.png';
       }
     };
-    // Cambia bandera al cargar
-    const img = langBtn.querySelector('img');
-    if (img) {
-      img.src = lang === 'es' ? '/public/assets/images/icons/lang.svg' : '/public/assets/images/icons/lang-en.svg';
-    }
   }
 
   function setLang(l) {
     localStorage.setItem('lang', l);
   }
 });
+
 // Fin del script para menú hamburguesa

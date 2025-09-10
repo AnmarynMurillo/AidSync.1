@@ -1,0 +1,162 @@
+/* Estilos específicos para componentes del header */
+
+/* Estilos para el popup de logout */
+.logout-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.popup-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#confirm-logout {
+  background: #dc3545;
+  color: white;
+}
+
+#confirm-logout:hover {
+  background: #c82333;
+}
+
+#cancel-logout {
+  background: #6c757d;
+  color: white;
+}
+
+#cancel-logout:hover {
+  background: #5a6268;
+}
+
+/* Estilos para el perfil de usuario */
+.profile-icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.profile-icon-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Estilos para botones de idioma y tema */
+.lang-switch,
+.theme-switch-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-switch:hover,
+.theme-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.header-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Estilos para el botón de logout */
+.btn.logout {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.btn.logout:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive design para componentes */
+@media (max-width: 768px) {
+  .user-name {
+    display: none;
+  }
+  
+  .profile-icon-link {
+    padding: 0.25rem;
+  }
+  
+  .popup-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .popup-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+} 
